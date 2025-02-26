@@ -1,3 +1,4 @@
+-- Drzewo plików
 return {
    "nvim-neo-tree/neo-tree.nvim",
     branch="v3.x",
@@ -6,6 +7,17 @@ return {
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
+
+
+  opts = {
+    window = {
+      mappings = {
+        ["l"] = "open",
+        ["h"] = "close_node",
+        ["<space>"] = "none"
+      }
+    }
+  },
 
   config = function()
     vim.keymap.set("n", '<leader>n', ':Neotree filesystem float<CR>', {})

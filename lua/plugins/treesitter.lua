@@ -1,3 +1,4 @@
+-- Podświetlanie składni
 return {
    "nvim-treesitter/nvim-treesitter", 
   build = ":TSUpdate",

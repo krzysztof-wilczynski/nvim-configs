@@ -1,3 +1,4 @@
+-- Dolny taskbar
 return {
   "nvim-lualine/lualine.nvim",
 
