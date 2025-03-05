@@ -2,7 +2,7 @@ local opt = vim.opt
 
 opt.autowrite = true
 opt.number = true
-opt.relativenumber = true
+-- opt.relativenumber = true
 opt.mouse = "a"
 opt.showmode = false
 
