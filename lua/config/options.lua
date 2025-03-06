@@ -31,7 +31,7 @@ opt.winminwidth = 5
 opt.wildmode = "longest:full,full"
 opt.foldmethod = "expr"
 opt.foldtext = ""
-opt.smoothscroll = true
+-- opt.smoothscroll = true
 opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
 
 vim.g.markdown_recommended_style = 0

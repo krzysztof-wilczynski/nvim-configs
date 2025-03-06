@@ -1,4 +1,11 @@
 -- Dolny taskbar
+
+local codestats = require 'codestats'
+
+local xp = function()
+  return codestats.get_xp(0)
+end
+
 return {
 	"nvim-lualine/lualine.nvim",
 
@@ -15,6 +22,15 @@ return {
 					},
 				},
 			},
+			sections = {
+				lualine_y = {{
+					xp,
+					fmt = function(s)
+						return s and s .. " xp"
+					end,
+				}},
+			},
+
 			extensions = {
 				"neo-tree",
 				"lazy",
