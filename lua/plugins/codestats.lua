@@ -9,8 +9,8 @@ return {
 			base_url = "https://codestats.net",
 			api_key = os.getenv("CS_API_KEY"),
 			send_on_exit = true,
-			send_on_timer = false,
-			-- timer_interval = 60000,
+			send_on_timer = true,
+			timer_interval = 60000,
 			curl_timeout = 5,
 		})
 	end,
