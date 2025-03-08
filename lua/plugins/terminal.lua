@@ -37,11 +37,6 @@ return {
           NormalFloat = {
             link = "Normal",
           },
-          FloatBorder = {
-            -- guifg = <VALUE-HERE>,
-            -- guibg = <VALUE-HERE>,
-            link = "FloatBorder",
-          },
         },
         shade_filetypes = {},
         shade_terminals = false,
