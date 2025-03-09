@@ -36,4 +36,3 @@ map.set("n", "<leader><tab>e", "<cmd>tabnext<cr>", { desc = "Następna karta" })
 map.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Zamknij kartę" })
 map.set("n", "<leader><tab>q", "<cmd>tabprevious<cr>", { desc = "Poprzednia karta" })
 
-
