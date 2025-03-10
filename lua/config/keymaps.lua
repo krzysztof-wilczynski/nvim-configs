@@ -36,3 +36,4 @@ map.set("n", "<leader><tab>e", "<cmd>tabnext<cr>", { desc = "Następna karta" })
 map.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Zamknij kartę" })
 map.set("n", "<leader><tab>q", "<cmd>tabprevious<cr>", { desc = "Poprzednia karta" })
 
+map.set('n', "<F10>", ":Dbee toggle<CR>", { desc = "Otwórz konektor DB"})

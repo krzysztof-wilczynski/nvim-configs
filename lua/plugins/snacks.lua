@@ -18,7 +18,7 @@ return {
             icon = " ",
             key = "c",
             desc = "Ustawienia",
-            action = ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>",
+            action = ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd",
           },
           { icon = " ", key = "s", desc = "Przywróć sesję", section = "session" },
           {

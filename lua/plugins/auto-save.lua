@@ -5,5 +5,6 @@ return {
     events = { "InsertLeave", "BufLeave" },
     silent = true,
     exclude_ft = { "neo-tree" },
+    timeout = 1000
   },
 }
