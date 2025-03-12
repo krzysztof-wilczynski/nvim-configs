@@ -1,5 +1,8 @@
 return {
   "folke/snacks.nvim",
+  dependencies = {
+    "folke/todo-comments.nvim",
+  },
   priority = 2137,
   lazy = false,
   opts = {
@@ -68,6 +71,27 @@ return {
     },
   },
   keys = {
-    { "<leader><space>", function() Snacks.picker() end, desc = "Wyszukaj..."}
+    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Wyszukaj..."},
+    { "<leader>fa", function() Snacks.picker.commands() end, desc = "Szukaj poleceń"},
+    { "<leader>fc", function() Snacks.picker.files({cwd = vim.fn.stdpath("config")}) end, desc = "Szukaj plików w configu"},
+    { "<leader>ff", function() Snacks.picker.files() end, desc = "Szukaj plików"},
+    { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grepuj"},
+    { "<leader>fh", function() Snacks.picker.help() end, desc = "Szukaj w plikach pomocy"},
+    { "<leader>fk", function() Snacks.picker.keymaps() end, desc = "Szukaj skrótów klawiszowych"},
+    { "<leader>fq", function() Snacks.picker.qflist() end, desc = "Szukaj quickfixów"},
+    { "<leader>fp", function() Snacks.picker.projects() end, desc = "Szukaj projektów"},
+    { "<leader>fr", function() Snacks.picker.recent() end, desc = "Ostatnie pliki"},
+    { "<leader>ft", function() Snacks.picker.todo_comments({keywords = {"TODO", "FIX", "FIXME"}}) end, desc = "Szukaj TODO"},
+    { "<leader>f]", function() Snacks.picker.colorschemes() end, desc = "Szukaj schematów kolorystycznych"},
+
+    -- git
+    { "<leader>gg", "<cmd>LazyGit<CR>", desc = "Otwórz LazyGit" },
+    { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+    { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
+    { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+    { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+    { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+    { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+    { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
   },
 }
