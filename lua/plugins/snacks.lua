@@ -63,5 +63,11 @@ return {
         { section = "startup" },
       },
     },
+    picker = {
+      enabled = true,
+    },
+  },
+  keys = {
+    { "<leader><space>", function() Snacks.picker() end, desc = "Wyszukaj..."}
   },
 }

@@ -2,8 +2,8 @@
 
 local codestats = require("codestats")
 
-local xp = function()
-  return codestats.get_xp(0)
+local lvl = function()
+	return codestats.get_level(0)
 end
 
 return {
