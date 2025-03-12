@@ -71,7 +71,29 @@ return {
     },
     gitbrowse = {
       enabled = true
-    }
+    },
+    indent = {
+      enabled = true,
+      only_scope = true,
+    },
+    image = {
+      enabled = true
+    },
+    lazygit = {
+      enabled = true
+    },
+    notifier = {
+      enabled = true
+    },
+    statuscolumn = {
+      enabled = true
+    },
+    toggle = {
+      enabled = true
+    },
+    words = {
+      enabled = true
+    },
   },
   keys = {
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Wyszukaj..."},
@@ -86,9 +108,8 @@ return {
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Ostatnie pliki"},
     { "<leader>ft", function() Snacks.picker.todo_comments({keywords = {"TODO", "FIX", "FIXME"}}) end, desc = "Szukaj TODO"},
     { "<leader>f]", function() Snacks.picker.colorschemes() end, desc = "Szukaj schematów kolorystycznych"},
--- TODO: dupa blada
     -- git
-    { "<leader>gg", "<cmd>LazyGit<CR>", desc = "Otwórz LazyGit" },
+    { "<leader>gg", function() Snacks.lazygit() end, desc = "Otwórz LazyGit" },
     { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
     { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
     { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
