@@ -1,8 +1,5 @@
 return {
   "folke/snacks.nvim",
-  dependencies = {
-    "folke/todo-comments.nvim",
-  },
   priority = 2137,
   lazy = false,
   opts = {
@@ -69,6 +66,12 @@ return {
     picker = {
       enabled = true,
     },
+    git = {
+      enabled = true,
+    },
+    gitbrowse = {
+      enabled = true
+    }
   },
   keys = {
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Wyszukaj..."},
@@ -83,7 +86,7 @@ return {
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Ostatnie pliki"},
     { "<leader>ft", function() Snacks.picker.todo_comments({keywords = {"TODO", "FIX", "FIXME"}}) end, desc = "Szukaj TODO"},
     { "<leader>f]", function() Snacks.picker.colorschemes() end, desc = "Szukaj schematów kolorystycznych"},
-
+-- TODO: dupa blada
     -- git
     { "<leader>gg", "<cmd>LazyGit<CR>", desc = "Otwórz LazyGit" },
     { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
@@ -91,6 +94,7 @@ return {
     { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
     { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
     { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+    { "<leader>go", function() Snacks.gitbrowse() end, desc = "Zobacz remote"},
     { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
     { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
   },
