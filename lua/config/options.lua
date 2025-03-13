@@ -1,5 +1,4 @@
 local options = {
-  autowrite      = true,
   cmdheight      = 0,                       --- Give more space for displaying messages
   completeopt    = "menu,menuone,preview",  --- Better autocompletion
   cursorline     = true,                    --- Highlight of current line
@@ -17,7 +16,7 @@ local options = {
   relativenumber = false,                   --- Enables relative number
   scrolloff      = 8,                       --- Always keep space when scrolling to bottom/top edge
   shiftwidth     = 2,                       --- Change a number of space characters inserted for indentation
-  showtabline    = 2,                       --- Always show tabs
+  showtabline    = 1,                       --- Show tab lines only if there are at least two tab pages
   signcolumn     = "yes:2",                 --- Add extra sign column next to line number
   smartcase      = true,                    --- Uses case in search
   smartindent    = true,                    --- Makes indenting smart
