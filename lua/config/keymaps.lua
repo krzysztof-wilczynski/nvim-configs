@@ -1,39 +1,50 @@
-local map = vim.keymap
+local keymap = vim.keymap.set
+local silent = { silent = true }
 
-map.set('n', '<Esc>', '<cmd>nohlsearch<CR>') -- clear highlights on search when pressing <Esc> in normal mode
+keymap("n", "<Esc>", "<cmd>nohlsearch<CR>") -- clear highlights on search when pressing <Esc> in normal mode
 
-map.set('n', '<leader>q', vim.diagnostic.setloclist, {desc = 'Open diagnostic [Q]uickfix list'})
+keymap("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Disable arrow keys in normal mode
-map.set('n', '<left>', '<cmd>echo "Use h"<CR>')
-map.set('n', '<right>', '<cmd>echo "Use l"<CR>')
-map.set('n', '<up>', '<cmd>echo "Use k"<CR>')
-map.set('n', '<down>', '<cmd>echo "Use j"<CR>')
+keymap("n", "<left>", '<cmd>echo "Use h"<CR>')
+keymap("n", "<right>", '<cmd>echo "Use l"<CR>')
+keymap("n", "<up>", '<cmd>echo "Use k"<CR>')
+keymap("n", "<down>", '<cmd>echo "Use j"<CR>')
 
 -- Keybinds to make split navigation easier.
-map.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-map.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-map.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-map.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+keymap("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+keymap("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+keymap("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+keymap("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Wcięcia
-map.set('n', '<' ,'<gv', { desc = "Zmniejsz wcięcie" })
-map.set('v', '<' ,'<gv', { desc = "Zmniejsz wcięcie" })
-map.set('n', '>' ,'>gv', { desc = "Zwiększ wcięcie" })
-map.set('v', '>' ,'>gv', { desc = "Zwiększ wcięcie" })
+keymap("n", "<", "<gv", { desc = "Zmniejsz wcięcie" })
+keymap("v", "<", "<gv", { desc = "Zmniejsz wcięcie" })
+keymap("n", ">", ">gv", { desc = "Zwiększ wcięcie" })
+keymap("v", ">", ">gv", { desc = "Zwiększ wcięcie" })
 
 -- windows
-map.set("n", "<leader>ww", "<C-W>s", { desc = "Podziel okno w pionie", remap = true })
-map.set("n", "<leader>wh", "<C-W>v", { desc = "Podziel okno w poziomie", remap = true })
-map.set("n", "<leader>wq", "<C-W>c", { desc = "Usuń okno", remap = true })
+keymap("n", "<leader>ww", "<C-W>s", { desc = "Podziel okno w pionie", remap = true })
+keymap("n", "<leader>wh", "<C-W>v", { desc = "Podziel okno w poziomie", remap = true })
+keymap("n", "<leader>wq", "<C-W>c", { desc = "Usuń okno", remap = true })
 
 -- tabs
-map.set("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Ostatnia karta" })
-map.set("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Zamknij inne karty" })
-map.set("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "Pierwsza karta" })
-map.set("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "Nowa karta" })
-map.set("n", "<leader><tab>e", "<cmd>tabnext<cr>", { desc = "Następna karta" })
-map.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Zamknij kartę" })
-map.set("n", "<leader><tab>q", "<cmd>tabprevious<cr>", { desc = "Poprzednia karta" })
+keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Ostatnia karta" })
+keymap("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Zamknij inne karty" })
+keymap("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "Pierwsza karta" })
+keymap("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "Nowa karta" })
+keymap("n", "<leader><tab>e", "<cmd>tabnext<cr>", { desc = "Następna karta" })
+keymap("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Zamknij kartę" })
+keymap("n", "<leader><tab>q", "<cmd>tabprevious<cr>", { desc = "Poprzednia karta" })
 
-map.set('n', "<F10>", ":Dbee toggle<CR>", { desc = "Otwórz konektor DB"})
+keymap("n", "<F10>", ":Dbee toggle<CR>", { desc = "Otwórz konektor DB" })
+
+-- Zapisywanie Ctrl+S
+keymap("n", "<C-s>", ":w<CR>", silent)
+keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
+
+-- Don't yank on delete char
+keymap("n", "x", '"_x', silent)
+keymap("n", "X", '"_X', silent)
+keymap("v", "x", '"_x', silent)
+keymap("v", "X", '"_X', silent)
