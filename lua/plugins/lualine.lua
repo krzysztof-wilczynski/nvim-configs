@@ -3,7 +3,7 @@
 local codestats = require("codestats")
 
 local lvl = function()
-	return codestats.get_level(0)
+  return codestats.get_level(0)
 end
 
 return {
@@ -16,21 +16,21 @@ return {
       options = {
         theme = "dracula",
         globalstatus = vim.o.laststatus == 3,
-        disabled_filetypes = {
-          statusline = {
-            "dashboard",
-            "alpha",
-            "snacks_dashboard",
-            "neo-tree",
-          },
-        },
+        -- disabled_filetypes = {
+        --   statusline = {
+        --     "dashboard",
+        --     "alpha",
+        --     "snacks_dashboard",
+        --     "neo-tree",
+        -- },
+        -- },
       },
       sections = {
         lualine_y = {
           {
-            xp,
+            lvl,
             fmt = function(s)
-              return s and s .. " xp"
+              return s and s .. " lvl"
             end,
           },
         },
@@ -40,7 +40,7 @@ return {
       },
 
       extensions = {
-        "neo-tree",
+        -- "neo-tree",
         "lazy",
         "fzf",
       },
