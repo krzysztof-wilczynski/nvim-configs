@@ -5,18 +5,12 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",
-      {
-        "saghen/blink.cmp",
-        -- Ensure blink.cmp is loaded before typescript-tools
-        lazy = false,
-        priority = 2137,
-      },
     },
     opts = {},
     ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
     config = function()
       require("typescript-tools").setup({
-        on_attach = function(client, bufnr)
+        on_attach = function(client, _)
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
         end,

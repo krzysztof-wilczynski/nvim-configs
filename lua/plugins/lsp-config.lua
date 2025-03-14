@@ -1,16 +1,25 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		lazy = false,
 		dependencies = {
-			"mason.nvim",
+			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			"saghen/blink.cmp",
+      {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+          library = {
+            {path = "${3rd}/luv/library", words = {"vim%.uv"}},
+          }
+        }
+      }
 		},
+
 		config = function()
-			require("config.lsp.setup")
-			require("config.lsp.config")
-			require("config.lsp.functions")
+      vim.neovim
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 		end,
 	},
 	{
@@ -21,6 +30,11 @@ return {
 		},
 		config = function()
 			require("mason").setup()
+			local servers = {
+				lua_ls = {},
+				volar = { "vue" },
+			}
+			local ensure_installed = vim.tbl_keys(servers)
 		end,
 	},
 	{
