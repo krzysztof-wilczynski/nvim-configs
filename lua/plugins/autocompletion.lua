@@ -1,28 +1,133 @@
+local function lspkind_config()
+	local lspKindConfig = require("lspkind")
+	lspKindConfig.init({
+		symbol_map = {
+			Boolean = "[] Boolean",
+			Character = "[] Character",
+			Class = "[] Class",
+			Color = "[] Color",
+			Constant = "[] Constant",
+			Constructor = "[] Constructor",
+			Enum = "[] Enum",
+			EnumMember = "[] EnumMember",
+			Event = "[ﳅ] Event",
+			Field = "[] Field",
+			File = "[] File",
+			Folder = "[ﱮ] Folder",
+			Function = "[ﬦ] Function",
+			Interface = "[] Interface",
+			Keyword = "[] Keyword",
+			Method = "[] Method",
+			Module = "[] Module",
+			Number = "[] Number",
+			Operator = "[Ψ] Operator",
+			Parameter = "[] Parameter",
+			Property = "[ﭬ] Property",
+			Reference = "[] Reference",
+			Snippet = "[] Snippet",
+			String = "[] String",
+			Struct = "[ﯟ] Struct",
+			Text = "[] Text",
+			TypeParameter = "[] TypeParameter",
+			Unit = "[] Unit",
+			Value = "[] Value",
+			Variable = "[ﳛ] Variable",
+			Copilot = "",
+		},
+	})
+end
+
+local border_chars = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+
 return {
-  'saghen/blink.cmp',
-  dependencies = 'rafamadriz/friendly-snippets',
+	"saghen/blink.cmp",
+	dependencies = {
+		"rafamadriz/friendly-snippets",
+		"Exafunction/codeium.nvim",
+		{ "onsails/lspkind.nvim", config = lspkind_config },
+	},
 
-  version = 'v0.*',
-  
-  opts = {
-    -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept, C-n/C-p for up/down)
-    -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys for up/down)
-    -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-    --
-    -- All presets have the following mappings:
-    -- C-space: Open menu or open docs if already open
-    -- C-e: Hide menu
-    -- C-k: Toggle signature help
-    --
-    -- See the full "keymap" documentation for information on defining your own keymap.
-    keymap = { preset = 'enter' },
+	version = "v0.*",
 
-    appearance = {
-      use_nvim_cmp_as_default = true,
-      nerd_font_variant = 'mono'
-    },
+	opts = {
+		snippets = {},
+		keymap = {
+			["<Tab>"] = { "select_next", "fallback" },
+			["<S-Tab>"] = { "select_prev", "fallback" },
+			["<Up>"] = { "select_prev", "fallback" },
+			["<Down>"] = { "select_next", "fallback" },
+			["<CR>"] = { "accept", "fallback" },
+			["<C-b>"] = {
+				function(cmp)
+					cmp.scroll_documentation_up(4)
+				end,
+			},
+			["<C-f>"] = {
+				function(cmp)
+					cmp.scroll_documentation_down(4)
+				end,
+			},
+		},
 
-    signature = {enabled = true}
-  }
+		sources = {
+			default = {
+				"lsp",
+				"path",
+				"snippets",
+				"buffer",
+				-- "codeium",
+			},
+
+			-- providers = {
+			-- 	codeium = {
+			-- 		module = "codeium",
+			-- 		name = "Codeium",
+			-- 		score_offset = 100,
+			-- 		async = true,
+			-- },
+			-- },
+		},
+		completion = {
+			trigger = {
+				show_on_trigger_character = true,
+				show_on_insert_on_trigger_character = true,
+				show_on_x_blocked_trigger_characters = { "'", '"', "(", "{" },
+			},
+			menu = {
+				auto_show = true,
+				border = border_chars,
+				draw = {
+					components = {
+						kind_icon = {
+							text = function(ctx)
+								return require("lspkind").symbolic(ctx.kind, {
+									mode = "symbol",
+									preset = "codicons",
+								})
+							end,
+						},
+					},
+				},
+			},
+			documentation = {
+				auto_show = true,
+				auto_show_delay_ms = 0,
+				window = {
+					border = border_chars,
+				},
+			},
+			list = { selection = { preselect = false, auto_insert = true } },
+			ghost_text = {
+				enabled = true,
+			},
+		},
+
+		appearance = {
+			use_nvim_cmp_as_default = true,
+			nerd_font_variant = "mono",
+		},
+
+		signature = { enabled = true },
+	},
+	opts_extend = { "sources.default" },
 }
-

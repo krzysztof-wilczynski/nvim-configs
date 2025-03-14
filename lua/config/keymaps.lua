@@ -3,7 +3,7 @@ local silent = { silent = true }
 
 keymap("n", "<Esc>", "<cmd>nohlsearch<CR>") -- clear highlights on search when pressing <Esc> in normal mode
 
-keymap("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+keymap("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Otwórz diagnostykę" })
 
 -- Disable arrow keys in normal mode
 keymap("n", "<left>", '<cmd>echo "Use h"<CR>')
@@ -42,6 +42,11 @@ keymap("n", "<F10>", ":Dbee toggle<CR>", { desc = "Otwórz konektor DB" })
 -- Zapisywanie Ctrl+S
 keymap("n", "<C-s>", ":w<CR>", silent)
 keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
+
+-- Wychodzenie
+-- keymap("n", "<leader>qq", ":qall<CR>", { desc = "Wyjdź" })
+-- keymap("n", "<leader>qQ", ":qall!<CR>", { desc = "Wyjdź bez zapisywania" })
+-- keymap("n", "<leader>qs", ":source %<CR>", { desc = "Przeładuj plik" })
 
 -- Don't yank on delete char
 keymap("n", "x", '"_x', silent)

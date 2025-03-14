@@ -7,13 +7,13 @@
 
 ## TODO
 
-- autoformatowanie
-- w plikach TS nie ma numerów wierszy
-- autododawanie zamknięcia nawiasów
-- formatowanie on-save
-- nazwa pliku na górze okna
-- pogrupowanie bindingów w which-key
-- obsługa testów jednostkowych dla frontendu
-- obsługa pythona
-- TUI dla dockera
-- markdown preview
+[X] autoformatowanie
+[ ] w plikach TS nie ma numerów wierszy
+[X] autododawanie zamknięcia nawiasów
+[X] formatowanie on-save
+[] nazwa pliku na górze okna
+[] pogrupowanie bindingów w which-key
+[] obsługa testów jednostkowych dla frontendu
+[] obsługa pythona
+[] TUI dla dockera
+[X] markdown preview

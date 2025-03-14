@@ -251,5 +251,56 @@ return {
 			end,
 			desc = "Git Stash",
 		},
+		-- LSP
+		{
+			"gd",
+			function()
+				Snacks.picker.lsp_definitions()
+			end,
+			desc = "Przejdź do definicji",
+		},
+		{
+			"gD",
+			function()
+				Snacks.picker.lsp_declarations()
+			end,
+			desc = "Przejdź do deklaracji",
+		},
+		{
+			"gr",
+			function()
+				Snacks.picker.lsp_references()
+			end,
+			nowait = true,
+			desc = "Odniesienia",
+		},
+		{
+			"gI",
+			function()
+				Snacks.picker.lsp_implementations()
+			end,
+			desc = "Przejdź do implementacji",
+		},
+		{
+			"gy",
+			function()
+				Snacks.picker.lsp_type_definitions()
+			end,
+			desc = "Przejdź do definicji typu",
+		},
+		{
+			"<leader>fs",
+			function()
+				Snacks.picker.lsp_symbols()
+			end,
+			desc = "LSP Symbols",
+		},
+		{
+			"<leader>fS",
+			function()
+				Snacks.picker.lsp_workspace_symbols()
+			end,
+			desc = "LSP Workspace Symbols",
+		},
 	},
 }
