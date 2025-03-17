@@ -51,23 +51,13 @@ return {
 
 	opts = {
 		snippets = {},
-		keymap = {
-			["<Tab>"] = { "select_next", "fallback" },
-			["<S-Tab>"] = { "select_prev", "fallback" },
-			["<Up>"] = { "select_prev", "fallback" },
-			["<Down>"] = { "select_next", "fallback" },
-			["<CR>"] = { "accept", "fallback" },
-			["<C-b>"] = {
-				function(cmp)
-					cmp.scroll_documentation_up(4)
-				end,
-			},
-			["<C-f>"] = {
-				function(cmp)
-					cmp.scroll_documentation_down(4)
-				end,
-			},
-		},
+    -- C-space -> open menu/docs
+    -- C-e -> hide
+    -- C-k -> toggle signature help
+    -- C-y -> accept
+    -- C-n -> next (down)
+    -- C-p -> previous (up)
+		keymap = { preset = "default" },
 
 		sources = {
 			default = {

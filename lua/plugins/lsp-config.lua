@@ -1,4 +1,28 @@
 return {
+  {
+    "WhoIsSethdaniel/mason-tool-installer",
+    dependencies ={
+      {      "williamboman/mason.nvim", opts = true},
+      {"williamboman/mason-lspconfig.nvim", opts=true}
+    },
+    opts = {
+      ensure_installed = {
+        "pyright", -- LSP for python
+        "ruff", -- Linter & formatter (includes flake8, pep8, black, isort, etc.)
+        "debugpy", -- debugger
+        "taplo", -- LSP for toml (e.g. for pyproject.toml files),
+        "bashls",
+        "cssls",
+        "eslint",
+        "graphql",
+        "html",
+        "jsonls",
+        "lua_ls",
+        "prismals",
+        "tailwindcss"
+      }
+    }
+  },
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -16,11 +40,12 @@ return {
 				},
 			},
 		},
-
 		opts = {
 			servers = {
 				lua_ls = {},
 				volar = { "vue" },
+        pyright = {},
+        ruff = {},
 			},
 		},
 		config = function(_, opts)

@@ -2,16 +2,40 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     event = "BufReadPre",
 
-    config = function()
-      local config = require("nvim-treesitter.configs")
-      config.setup({
-        auto_install = true,
-        highlight = { enable = true },
-        indent = { enable = true },
-      })
-    end,
+    main = "nvim-treesitter.configs",
+
+opts = {
+      highlight = {enable = true},
+      indent = {enable = true},
+      ensure_installed = {
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
+        "css",
+        "csv",
+        "dockerfile",
+        "graphql",
+        "html",
+        "http",
+        "javascript",
+        "prisma",
+        "regex",
+        "sql",
+        "typescript",
+        "vue",
+        "yaml",
+        "json",
+        "python",
+        "toml",
+        "markdown",
+        "markdown_inline",
+      },
+      auto_install = true,
+    },
 
     dependencies = {
       "hiphish/rainbow-delimiters.nvim",
