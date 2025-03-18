@@ -51,12 +51,12 @@ return {
 
 	opts = {
 		snippets = {},
-    -- C-space -> open menu/docs
-    -- C-e -> hide
-    -- C-k -> toggle signature help
-    -- C-y -> accept
-    -- C-n -> next (down)
-    -- C-p -> previous (up)
+		-- C-space -> open menu/docs
+		-- C-e -> hide
+		-- C-k -> toggle signature help
+		-- C-y -> accept
+		-- C-n -> next (down)
+		-- C-p -> previous (up)
 		keymap = { preset = "default" },
 
 		sources = {
@@ -65,9 +65,16 @@ return {
 				"path",
 				"snippets",
 				"buffer",
+				"pypi",
 				-- "codeium",
 			},
-
+			providers = {
+				pypi = {
+					name = "PyPi",
+					module = "py-requirements.integrations.blink",
+					fallback = { "lsp" },
+				},
+			},
 			-- providers = {
 			-- 	codeium = {
 			-- 		module = "codeium",
