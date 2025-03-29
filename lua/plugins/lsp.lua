@@ -1,7 +1,7 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-    lazy = false,
+		lazy = false,
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -22,9 +22,6 @@ return {
 	{
 		"williamboman/mason.nvim",
 		cmd = "Mason",
-		keys = {
-			{ "<leader>om", "<cmd>Mason<CR>", desc = "Mason" },
-		},
 	},
 	{
 		"antosha417/nvim-lsp-file-operations",

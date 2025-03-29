@@ -38,7 +38,10 @@ keymap("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Zamknij kartę" })
 keymap("n", "<leader><tab>q", "<cmd>tabprevious<cr>", { desc = "Poprzednia karta" })
 
 keymap("n", "<F10>", ":Dbee toggle<CR>", { desc = "Otwórz konektor DB" })
-keymap("n", "<leader>oc", ":CsvViewToggle", {desc = "Otwórz podgląd CSV"})
+keymap("n", "<leader>oc", ":CsvViewToggle<CR>", { desc = "Otwórz podgląd CSV" })
+keymap("n", "<leader>om", ":Mason<CR>", { desc = "Otwórz Masona" })
+keymap("n", "<leader>op", ":Pendulum<CR>", { desc = "Otwórz Pendulum" })
+keymap("n", "<leader>oP", ":PendulumHours<CR>", { desc = "Otwórz Pendulum (aktywność godzinowa)" })
 
 -- Zapisywanie Ctrl+S
 keymap("n", "<C-s>", ":w<CR>", silent)
