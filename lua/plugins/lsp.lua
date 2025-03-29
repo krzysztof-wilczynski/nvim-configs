@@ -17,6 +17,7 @@ return {
 		},
 		config = function()
 			require("config.lsp.setup")
+			require("config.lsp.functions")
 		end,
 	},
 	{
