@@ -17,6 +17,12 @@ keymap("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 keymap("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 keymap("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+-- Resize window using <ctrl> arrow keys
+keymap("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Zwiększ wysokość okna" })
+keymap("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Zmniejsz wysokość okna" })
+keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Zmniejsz szerokość okna" })
+keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Zwiększ szerokość okna" })
+
 -- Wcięcia
 keymap("n", "<", "<gv", { desc = "Zmniejsz wcięcie" })
 keymap("v", "<", "<gv", { desc = "Zmniejsz wcięcie" })
@@ -40,8 +46,8 @@ keymap("n", "<leader><tab>q", "<cmd>tabprevious<cr>", { desc = "Poprzednia karta
 keymap("n", "<F10>", ":Dbee toggle<CR>", { desc = "Otwórz konektor DB" })
 keymap("n", "<leader>oc", ":CsvViewToggle<CR>", { desc = "Otwórz podgląd CSV" })
 keymap("n", "<leader>om", ":Mason<CR>", { desc = "Otwórz Masona" })
-keymap("n", "<leader>op", ":Pendulum<CR>", { desc = "Otwórz Pendulum" })
-keymap("n", "<leader>oP", ":PendulumHours<CR>", { desc = "Otwórz Pendulum (aktywność godzinowa)" })
+keymap("n", "<leader>opp", ":Pendulum<CR>", { desc = "Otwórz Pendulum" })
+keymap("n", "<leader>oph", ":PendulumHours<CR>", { desc = "Otwórz Pendulum (aktywność godzinowa)" })
 
 -- Zapisywanie Ctrl+S
 keymap("n", "<C-s>", ":w<CR>", silent)

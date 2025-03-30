@@ -31,7 +31,7 @@ return {
 				"lsp",
 				"path",
 				-- "snippets",
-				"buffer",
+				-- "buffer",
 				"pypi",
 				-- "codeium",
 			},
