@@ -37,12 +37,12 @@ wk.setup({
 		border = "rounded", -- none, single, double, shadow, rounded
 		padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
 	},
-	layout = {
-		height = { min = 4, max = 25 }, -- min and max height of the columns
-		width = { min = 20, max = 50 }, -- min and max width of the columns
-		spacing = 4, -- spacing between columns
-		align = "left", -- align columns left, center or right
-	},
+	-- layout = {
+	-- 	height = { min = 4, max = 50 }, -- min and max height of the columns
+	-- 	width = { min = 20, max = 25 }, -- min and max width of the columns
+	-- 	spacing = 4, -- spacing between columns
+	-- 	align = "left", -- align columns left, center or right
+	-- },
 	show_help = true, -- show help message on the command line when the popup is visible
 })
 
@@ -71,5 +71,40 @@ wk.add({
 			neotest.run.run()
 		end,
 		desc = "Uruchom test",
+	},
+	{
+		"<leader>tf",
+		function()
+			neotest.run.run(vim.fn.expand("%"))
+		end,
+		desc = "Uruchom wszystkie testy w pliku",
+	},
+	{
+		"<leader>to",
+		function()
+			neotest.output.toggle()
+		end,
+		desc = "Pokaż output",
+	},
+	{
+		"<leader>ts",
+		function()
+			neotest.summary.toggle()
+		end,
+		desc = "Pokaż strukturę testów",
+	},
+	{
+		"<leader>td",
+		function()
+			neotest.diagnostic.toggle()
+		end,
+		desc = "Pokaż błędy testów",
+	},
+	{
+		"<leader>tc",
+		function()
+			neotest.status.toggle()
+		end,
+		desc = "Pokaż statusy testów",
 	},
 })
