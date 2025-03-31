@@ -56,8 +56,6 @@ wk.add({
 		desc = "Wyświetl wszystkie skróty",
 	},
 	{ "<leader>q", desc = "Pokaż quickfixy" },
-	{ "<leader>v", "<C-W>v", desc = "Podziel z prawej" },
-	{ "<leader>V", "<C-W>s", desc = "Podziel poniżej" },
 })
 
 -- Neotest
