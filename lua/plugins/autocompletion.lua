@@ -32,15 +32,15 @@ return {
 				"path",
 				-- "snippets",
 				-- "buffer",
-				"pypi",
+				-- "pypi",
 				-- "codeium",
 			},
 			providers = {
-				pypi = {
-					name = "PyPi",
-					module = "py-requirements.integrations.blink",
-					fallbacks = { "lsp" },
-				},
+				-- pypi = {
+				-- 	name = "PyPi",
+				-- 	module = "py-requirements.integrations.blink",
+				-- 	fallbacks = { "lsp" },
+				-- },
 			},
 			-- providers = {
 			-- 	codeium = {
