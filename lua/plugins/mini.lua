@@ -29,4 +29,11 @@ return {
 			require("mini.surround").setup()
 		end,
 	},
+	{
+		"echasnovski/mini.ai",
+		version = "*", -- stable
+		config = function()
+			require("mini.ai").setup()
+		end,
+	},
 }
