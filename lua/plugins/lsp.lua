@@ -1,7 +1,7 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-    lazy = false,
+		lazy = false,
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -17,14 +17,12 @@ return {
 		},
 		config = function()
 			require("config.lsp.setup")
+			require("config.lsp.functions")
 		end,
 	},
 	{
 		"williamboman/mason.nvim",
 		cmd = "Mason",
-		keys = {
-			{ "<leader>om", "<cmd>Mason<CR>", desc = "Mason" },
-		},
 	},
 	{
 		"antosha417/nvim-lsp-file-operations",

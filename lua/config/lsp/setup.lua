@@ -11,6 +11,11 @@ mason.setup({
 mason_lsp.setup({
 	ensure_installed = {
 		"lua_ls",
+		"bashls",
+		"cssls",
+		"eslint",
+		"html",
+		"jsonls",
 	},
 
 	automatic_installation = true,
@@ -50,6 +55,57 @@ require("mason-lspconfig").setup_handlers({
 			handlers = handlers,
 			on_attach = on_attach,
 			settings = require("config.lsp.servers.lua_ls").settings,
+		})
+	end,
+
+	["ts_ls"] = function()
+		require("typescript-tools").setup({
+			capabilities = capabilities or vim.lsp.protocol.make_client_capabilities(),
+			handlers = require("config.lsp.servers.tsserver").handlers,
+			on_attach = require("config.lsp.servers.tsserver").on_attach,
+			settings = require("config.lsp.servers.tsserver").settings,
+		})
+	end,
+
+	["cssls"] = function()
+		lspconfig.cssls.setup({
+			capabilities = capabilities,
+			handlers = handlers,
+			on_attach = require("config.lsp.servers.cssls").on_attach,
+			settings = require("config.lsp.servers.cssls").settings,
+		})
+	end,
+
+	["eslint"] = function()
+		lspconfig.eslint.setup({
+			capabilities = capabilities,
+			handlers = handlers,
+			on_attach = require("config.lsp.servers.eslint").on_attach,
+			settings = require("config.lsp.servers.eslint").settings,
+			flags = {
+				allow_incremental_sync = false,
+				debounce_text_changes = 1000,
+				exit_timeout = 1500,
+			},
+		})
+	end,
+
+	["jsonls"] = function()
+		lspconfig.jsonls.setup({
+			capabilities = capabilities,
+			handlers = handlers,
+			on_attach = on_attach,
+			settings = require("config.lsp.servers.jsonls").settings,
+		})
+	end,
+
+	["vuels"] = function()
+		lspconfig.vuels.setup({
+			filetypes = require("config.lsp.servers.vuels").filetypes,
+			handlers = handlers,
+			init_options = require("config.lsp.servers.vuels").init_options,
+			on_attach = require("config.lsp.servers.vuels").on_attach,
+			settings = require("config.lsp.servers.vuels").settings,
 		})
 	end,
 })
