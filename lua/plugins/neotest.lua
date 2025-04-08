@@ -15,7 +15,7 @@ return {
 					jestCommand = "pnpm test --",
 					env = { CI = true },
 					cwd = function(_)
-						return vim.fn.gwtcwd()
+						return vim.fn.getcwd()
 					end,
 				}),
 			},

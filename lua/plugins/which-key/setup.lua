@@ -56,6 +56,7 @@ wk.add({
 		desc = "Wyświetl wszystkie skróty",
 	},
 	{ "<leader>q", desc = "Pokaż quickfixy" },
+  { "<leader>cc", ":EslintFixAll<CR>", desc="Eslint Fix All"}
 })
 
 -- Neotest
