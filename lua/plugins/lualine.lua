@@ -33,6 +33,9 @@ return {
 							return s and s .. " lvl"
 						end,
 					},
+					-- {
+					-- 	require("music-controls")._statusline,
+					-- },
 				},
 				lualine_z = {
 					{ "time" },

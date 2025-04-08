@@ -14,7 +14,7 @@ wk.setup({
 			suggestions = 20, -- how many suggestions should be shown in the list?
 		},
 		presets = {
-			operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+	operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
 			motions = false, -- adds help for motions text_objects = false, -- help for text objects triggered after entering an operator
 			windows = false, -- default bindings on <c-w>
 			nav = false, -- misc bindings to work with windows
@@ -56,7 +56,8 @@ wk.add({
 		desc = "Wyświetl wszystkie skróty",
 	},
 	{ "<leader>q", desc = "Pokaż quickfixy" },
-  { "<leader>cc", ":EslintFixAll<CR>", desc="Eslint Fix All"}
+	{ "<leader>cc", ":EslintFixAll<CR>", desc = "Eslint Fix All" },
+	{ "<F9>", ":term ~/Pobrane/spotify_player<CR>", desc = "Uruchom Spotify" },
 })
 
 -- Neotest

@@ -28,6 +28,12 @@ keymap("n", "<leader>ww", "<C-W>s", { desc = "Podziel okno w pionie", remap = tr
 keymap("n", "<leader>wh", "<C-W>v", { desc = "Podziel okno w poziomie", remap = true })
 keymap("n", "<leader>wq", "<C-W>c", { desc = "Usuń okno", remap = true })
 
+-- Resize window using <ctrl> arrow keys
+keymap("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+keymap("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
 -- tabs
 keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Ostatnia karta" })
 keymap("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Zamknij inne karty" })
