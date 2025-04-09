@@ -60,3 +60,5 @@ keymap("n", "x", '"_x', silent)
 keymap("n", "X", '"_X', silent)
 keymap("v", "x", '"_x', silent)
 keymap("v", "X", '"_X', silent)
+
+keymap("n", "<leader>ca", vim.lsp.buf.code_action, {noremap=true, silent=true})
