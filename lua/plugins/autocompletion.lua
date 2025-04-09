@@ -8,7 +8,7 @@ return {
 			"saghen/blink.compat",
 			opts = { impersonate_nvim_cmp = true },
 		},
-		-- "rafamadriz/friendly-snippets",
+		"rafamadriz/friendly-snippets",
 		-- "echasnovski/mini.snippets",
 		-- "Exafunction/codeium.nvim",
 	},
@@ -27,28 +27,37 @@ return {
 		},
 
 		sources = {
-			default = {
-				"lsp",
-				"path",
-				-- "snippets",
-				-- "buffer",
-				-- "pypi",
-				-- "codeium",
-			},
-			providers = {
-				-- pypi = {
-				-- 	name = "PyPi",
-				-- 	module = "py-requirements.integrations.blink",
-				-- 	fallbacks = { "lsp" },
-				-- },
-			},
+			default = { "lsp", "path", "snippets", "buffer" },
 			-- providers = {
-			-- 	codeium = {
-			-- 		module = "codeium",
-			-- 		name = "Codeium",
-			-- 		score_offset = 100,
-			-- 		async = true,
-			-- },
+			-- 	lsp = {
+			-- 		name = "lsp",
+			-- 		enabled = true,
+			-- 		module = "blink.cmp.sources.lsp",
+			-- 		fallbacks = { "snippets", "buffer" },
+			-- 		score_offset = 90,
+			-- 	},
+			-- 	path = {
+			-- 		name = "path",
+			-- 		module = "blink.cmp.sources.path",
+			-- 		score_offset = 25,
+			-- 		fallbacks = { "snippets", "buffer" },
+			-- 		opts = {
+			-- 			trailing_slash = false,
+			-- 			label_trailing_slash = true,
+			-- 			get_cwd = function(context)
+			-- 				return vim.fn.expand("#%d:p:h").format(context.bufnr)
+			-- 			end,
+			-- 			show_hidden_files_by_default = true,
+			-- 		},
+			-- 	},
+			-- 	snippets = {
+			-- 		name = "snippets",
+			-- 		enabled = true,
+			-- 		max_items = 8,
+			-- 		min_keyword_length = 2,
+			-- 		module = "blink.cmp.sources.snippets",
+			-- 		score_offset = 85,
+			-- 	},
 			-- },
 		},
 		completion = {

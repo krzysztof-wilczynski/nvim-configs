@@ -62,3 +62,7 @@ keymap("v", "x", '"_x', silent)
 keymap("v", "X", '"_X', silent)
 
 keymap("n", "<leader>ca", vim.lsp.buf.code_action, {noremap=true, silent=true})
+
+-- Adjust font size
+keymap("n", "<C-=>", function() require('utils').adjust_font_size(1) end, silent)
+keymap("n", "<C-->", function() require('utils').adjust_font_size(-1) end, silent)

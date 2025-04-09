@@ -2,6 +2,7 @@
 
 return {
 	"ptdewey/pendulum-nvim",
+  enabled = vim.loop.os_uname().sysname ~= 'Windows_NT',
 	config = function()
 		require("pendulum").setup({
 			top_n = 10,
