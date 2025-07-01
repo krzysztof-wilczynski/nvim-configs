@@ -28,12 +28,6 @@ keymap("n", "<leader>ww", "<C-W>s", { desc = "Podziel okno w pionie", remap = tr
 keymap("n", "<leader>wh", "<C-W>v", { desc = "Podziel okno w poziomie", remap = true })
 keymap("n", "<leader>wq", "<C-W>c", { desc = "Usuń okno", remap = true })
 
--- Resize window using <ctrl> arrow keys
-keymap("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-keymap("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-
 -- tabs
 keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Ostatnia karta" })
 keymap("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Zamknij inne karty" })
@@ -43,26 +37,12 @@ keymap("n", "<leader><tab>e", "<cmd>tabnext<cr>", { desc = "Następna karta" })
 keymap("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Zamknij kartę" })
 keymap("n", "<leader><tab>q", "<cmd>tabprevious<cr>", { desc = "Poprzednia karta" })
 
-keymap("n", "<F10>", ":Dbee toggle<CR>", { desc = "Otwórz konektor DB" })
-keymap("n", "<leader>oc", ":CsvViewToggle<CR>", { desc = "Otwórz podgląd CSV" })
-
 -- Zapisywanie Ctrl+S
 keymap("n", "<C-s>", ":w<CR>", silent)
 keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
-
--- Wychodzenie
--- keymap("n", "<leader>qq", ":qall<CR>", { desc = "Wyjdź" })
--- keymap("n", "<leader>qQ", ":qall!<CR>", { desc = "Wyjdź bez zapisywania" })
--- keymap("n", "<leader>qs", ":source %<CR>", { desc = "Przeładuj plik" })
 
 -- Don't yank on delete char
 keymap("n", "x", '"_x', silent)
 keymap("n", "X", '"_X', silent)
 keymap("v", "x", '"_x', silent)
 keymap("v", "X", '"_X', silent)
-
-keymap("n", "<leader>ca", vim.lsp.buf.code_action, {noremap=true, silent=true})
-
--- Adjust font size
-keymap("n", "<C-=>", function() require('utils').adjust_font_size(1) end, silent)
-keymap("n", "<C-->", function() require('utils').adjust_font_size(-1) end, silent)
