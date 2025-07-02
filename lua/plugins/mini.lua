@@ -72,7 +72,7 @@ return {
             return {
               anchor = "SE",
               col = vim.o.columns,
-              row = vim.o.rows, -- górny prawy róg
+              row = vim.o.lines, -- górny prawy róg
               border = "rounded",
               zindex = 2000,
             }

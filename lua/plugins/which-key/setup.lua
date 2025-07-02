@@ -194,6 +194,27 @@ local lsp_keys = {
   },
 }
 
+local windows_keys = {
+  {
+    "<leader>w", group = "Okna",
+  },
+  {
+    "<leader>ws",
+    "<C-W>s",
+    desc = "Podziel okno w pionie"
+  },
+  {
+    "<leader>wv",
+    "<C-W>v",
+    desc = "Podziel okno w poziomie"
+  },
+  {
+    "<leader>wq",
+    "<C-W>c",
+    desc = "Usuń okno"
+  }
+}
+
 -- SEKCJA: Inne (przykład)
 local misc_keys = {
   {
@@ -208,4 +229,5 @@ local misc_keys = {
 wk.add(file_keys)
 wk.add(git_keys)
 wk.add(lsp_keys)
+wk.add(windows_keys)
 wk.add(misc_keys)

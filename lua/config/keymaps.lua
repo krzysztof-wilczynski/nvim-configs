@@ -23,11 +23,6 @@ keymap("v", "<", "<gv", { desc = "Zmniejsz wcięcie" })
 keymap("n", ">", ">gv", { desc = "Zwiększ wcięcie" })
 keymap("v", ">", ">gv", { desc = "Zwiększ wcięcie" })
 
--- windows
-keymap("n", "<leader>ww", "<C-W>s", { desc = "Podziel okno w pionie", remap = true })
-keymap("n", "<leader>wh", "<C-W>v", { desc = "Podziel okno w poziomie", remap = true })
-keymap("n", "<leader>wq", "<C-W>c", { desc = "Usuń okno", remap = true })
-
 -- tabs
 keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Ostatnia karta" })
 keymap("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Zamknij inne karty" })

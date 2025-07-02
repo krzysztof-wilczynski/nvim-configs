@@ -4,24 +4,8 @@ local lspconfig = require("lspconfig")
 
 mason.setup({ ui = { border = "rounded" } })
 
-local handlers = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    silent = true,
-    border = "rounded",
-  }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  }),
-}
-
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-local function on_attach(_, bufnr)
-  if vim.lsp.inlay_hint then
-    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-  end
-end
-
+local lsp_common = require("config.lsp.common")
+local capabilities = lsp_common.get_capabilities()
 
 mason_lsp.setup({
   ensure_installed = { "lua_ls" },
@@ -29,20 +13,22 @@ mason_lsp.setup({
   handlers = {
     function(server_name)
       require("lspconfig")[server_name].setup({
-        on_attach = on_attach,
+        on_attach = lsp_common.on_attach,
         capabilities = capabilities,
-        handlers = handlers,
+        handlers = lsp_common.handlers,
       })
     end,
 
     ["lua_ls"] = function()
       require("lspconfig").lua_ls.setup({
-        on_attach = on_attach,
+        on_attach = lsp_common.on_attach,
         capabilities = capabilities,
-        handlers = handlers,
+        handlers = lsp_common.handlers,
 
         settings = require("config.lsp.servers.lua_ls").settings
       })
     end,
+
+    ["rust_analyzer"] = function() end,
   }
 })

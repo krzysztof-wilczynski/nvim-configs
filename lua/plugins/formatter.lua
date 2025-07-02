@@ -4,6 +4,7 @@ return {
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
+      rust = { "rustfmt" }
     },
     -- Automatyczne formatowanie na zapis (z wykluczeniem niektórych filetype)
     format_on_save = function(bufnr)
