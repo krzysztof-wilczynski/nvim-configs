@@ -14,6 +14,7 @@ M.on_attach = function(_, bufnr)
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
 end
+
 M.handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     silent = true,

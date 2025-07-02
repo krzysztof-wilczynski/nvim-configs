@@ -222,8 +222,67 @@ local misc_keys = {
     function() wk.show({ global = true }) end,
     desc = "Wyświetl wszystkie skróty",
   },
+  {
+    "<leader>n",
+    "<cmd>Neotree toggle position=right<CR>",
+    desc = "Otwórz drzewo plików"
+  }
   -- Dodaj tu kolejne uniwersalne skróty...
 }
+
+local code_keys = {
+  {
+    "<leader>c", group = "Kod",
+  },
+}
+
+local function cargo_keymaps(bufnr)
+  local cargo_opts = { mode = "n", buffer = bufnr }
+  wk.add({
+    { "<leader>c", group = "Cargo", cargo_opts },
+
+    -- Najważniejsze polecenia bezpośrednio pod <leader>c
+    { "<leader>cb", "<cmd>CargoBuild<CR>", desc = "🏗️ Buduj projekt", cargo_opts },
+    { "<leader>cr", "<cmd>CargoRun<CR>", desc = "▶️ Uruchom (okno)", cargo_opts },
+    { "<leader>cR", "<cmd>CargoRunTerm<CR>", desc = "📟 Uruchom w terminalu", cargo_opts },
+    { "<leader>ct", "<cmd>CargoTest<CR>", desc = "🧪 Testuj", cargo_opts },
+    { "<leader>cB", "<cmd>CargoBench<CR>", desc = "📊 Benchmark", cargo_opts },
+    { "<leader>cc", "<cmd>CargoClean<CR>", desc = "🧹 Wyczyść artefakty", cargo_opts },
+    { "<leader>ck", "<cmd>CargoCheck<CR>", desc = "🔍 Sprawdź błędy", cargo_opts },
+    { "<leader>cl", "<cmd>CargoClippy<CR>", desc = "📋 Lintuj (Clippy)", cargo_opts },
+    { "<leader>cx", "<cmd>CargoFix<CR>", desc = "🔧 Napraw ostrzeżenia", cargo_opts },
+    { "<leader>cf", "<cmd>CargoFmt<CR>", desc = "🎨 Formatuj kod", cargo_opts },
+
+    -- Zależności (podgrupa)
+    { "<leader>cd", group = "Zależności", cargo_opts },
+    { "<leader>cda", "<cmd>CargoAdd<CR>", desc = "➕ Dodaj zależność", cargo_opts },
+    { "<leader>cdx", "<cmd>CargoRemove<CR>", desc = "➖ Usuń zależność", cargo_opts },
+    { "<leader>cdu", "<cmd>CargoUpdate<CR>", desc = "🔄 Aktualizuj zależności", cargo_opts },
+    { "<leader>cdo", "<cmd>CargoOutdated<CR>", desc = "📊 Przestarzałe zależności", cargo_opts },
+    { "<leader>cdA", "<cmd>CargoAudit<CR>", desc = "🛡️ Audyt zależności", cargo_opts },
+    { "<leader>cdv", "<cmd>CargoVendor<CR>", desc = "📦 Vendoruj zależności", cargo_opts },
+    { "<leader>cdt", "<cmd>CargoTree<CR>", desc = "🌲 Drzewo zależności", cargo_opts },
+    { "<leader>cdd", "<cmd>CargoAutodd<CR>", desc = "🤖 Zarządzaj automatycznie", cargo_opts },
+
+    -- Publikacja, dokumentacja, narzędzia (podgrupa)
+    { "<leader>cp", group = "Publikacja i narzędzia", cargo_opts },
+    { "<leader>cpd", "<cmd>CargoDoc<CR>", desc = "📚 Dokumentacja", cargo_opts },
+    { "<leader>cpp", "<cmd>CargoPublish<CR>", desc = "📦 Publikuj pakiet", cargo_opts },
+    { "<leader>cpi", "<cmd>CargoInstall<CR>", desc = "📥 Instaluj binarkę", cargo_opts },
+    { "<leader>cpu", "<cmd>CargoUninstall<CR>", desc = "📤 Odinstaluj binarkę", cargo_opts },
+    { "<leader>cps", "<cmd>CargoSearch<CR>", desc = "🔎 Szukaj pakietów", cargo_opts },
+    { "<leader>cpn", "<cmd>CargoNew<CR>", desc = "✨ Nowy projekt", cargo_opts },
+
+    { "<leader>cj", "<cmd>RustLsp joinLines<CR>", desc = "Złącz linie", cargo_opts }
+  })
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "rust",
+  callback = function(args)
+    cargo_keymaps(args.buf)
+  end,
+})
 
 -- Rejestracja wszystkich sekcji
 wk.add(file_keys)
@@ -231,3 +290,4 @@ wk.add(git_keys)
 wk.add(lsp_keys)
 wk.add(windows_keys)
 wk.add(misc_keys)
+wk.add(code_keys)
