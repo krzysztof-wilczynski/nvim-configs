@@ -1,7 +1,13 @@
 local function lsp_status()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
   if #clients > 0 then
-    return " " .. table.concat(vim.tbl_map(function(c) return c.name end, clients), ", ")
+    return " "
+        .. table.concat(
+          vim.tbl_map(function(c)
+            return c.name
+          end, clients),
+          ", "
+        )
   end
   return ""
 end
@@ -32,7 +38,7 @@ return {
       options = {
         theme = "catppuccin",
         globalstatus = vim.o.laststatus == 3,
-        section_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         component_separators = { left = "|", right = "|" },
       },
       sections = {

@@ -16,7 +16,7 @@ M.settings = {
       enable = false,
     },
     format = {
-      enable = true,
+      enable = false,
       defaultConfig = {
         indent_style = "space",
         indent_size = "2",
