@@ -47,3 +47,6 @@ keymap("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = tr
 -- Adjust font size
 keymap("n", "<C-=>", function() require('utils').adjust_font_size(1) end, silent)
 keymap("n", "<C-->", function() require('utils').adjust_font_size(-1) end, silent)
+
+-- Przejście do początku kolejnej linii (jak w VS Code i JetBrainsach)
+keymap("i", '<C-CR>', '<Esc>o')
