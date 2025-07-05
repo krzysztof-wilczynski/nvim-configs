@@ -281,6 +281,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",
   callback = function(args)
     cargo_keymaps(args.buf)
+    vim.keymap.set("i", '<C-CR>', '<Esc>A;<Esc>o')
   end,
 })
 
