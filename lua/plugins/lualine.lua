@@ -1,3 +1,7 @@
+local function clock()
+  return os.date("%H:%M")
+end
+
 local function lsp_status()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
   if #clients > 0 then
@@ -26,8 +30,7 @@ end
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
-    "iamvladw/lualine-time.nvim",
-    "catppuccin/nvim", -- motyw z magentą i integracją z lualine
+    "catppuccin/nvim",
   },
   config = function()
     -- Motyw catppuccin z magentą/fioletem
@@ -62,7 +65,7 @@ return {
           { venv, color = { fg = "#fab387" } },
         },
         lualine_z = {
-          { "time", separator = { left = "", right = "" }, right_padding = 2 }, -- zegar
+          { clock, separator = { left = "", right = "" }, right_padding = 2 }, -- zegar
         },
       },
       extensions = { "lazy", "fzf" },

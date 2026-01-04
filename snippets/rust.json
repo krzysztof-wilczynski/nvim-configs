@@ -1,0 +1,326 @@
+{
+  "Funkcja": {
+    "prefix": "fn",
+    "body": [
+      "fn ${1:nazwa}(${2:args}) ${3:-> ${4:typ} }{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Definicja funkcji"
+  },
+  "Funkcja publiczna": {
+    "prefix": "pfn",
+    "body": [
+      "pub fn ${1:nazwa}(${2:args}) ${3:-> ${4:typ} }{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Publiczna funkcja"
+  },
+  "Funkcja async": {
+    "prefix": "afn",
+    "body": [
+      "async fn ${1:nazwa}(${2:args}) ${3:-> ${4:typ} }{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Funkcja asynchroniczna"
+  },
+  "Test": {
+    "prefix": "test",
+    "body": [
+      "#[test]",
+      "fn ${1:test_nazwa}() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Funkcja testowa"
+  },
+  "Test async": {
+    "prefix": "atest",
+    "body": [
+      "#[tokio::test]",
+      "async fn ${1:test_nazwa}() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Asynchroniczny test (tokio)"
+  },
+  "Struct": {
+    "prefix": "struct",
+    "body": [
+      "#[derive(Debug${1:, Clone})]",
+      "pub struct ${2:Nazwa} {",
+      "\t${3:pole}: ${4:typ},",
+      "}"
+    ],
+    "description": "Struktura z derive"
+  },
+  "Enum": {
+    "prefix": "enum",
+    "body": [
+      "#[derive(Debug${1:, Clone})]",
+      "pub enum ${2:Nazwa} {",
+      "\t${3:Wariant},",
+      "}"
+    ],
+    "description": "Enum z derive"
+  },
+  "Impl": {
+    "prefix": "impl",
+    "body": [
+      "impl ${1:Typ} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Blok implementacji"
+  },
+  "Impl new": {
+    "prefix": "new",
+    "body": [
+      "pub fn new(${1:args}) -> Self {",
+      "\tSelf {",
+      "\t\t$0",
+      "\t}",
+      "}"
+    ],
+    "description": "Konstruktor new()"
+  },
+  "Match": {
+    "prefix": "match",
+    "body": [
+      "match ${1:expr} {",
+      "\t${2:pattern} => ${3:result},",
+      "\t_ => ${4:default},",
+      "}"
+    ],
+    "description": "Wyrażenie match"
+  },
+  "If let": {
+    "prefix": "iflet",
+    "body": [
+      "if let ${1:Some(${2:val})} = ${3:expr} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "If let pattern matching"
+  },
+  "Result": {
+    "prefix": "result",
+    "body": "Result<${1:T}, ${2:E}>",
+    "description": "Typ Result"
+  },
+  "Option": {
+    "prefix": "option",
+    "body": "Option<${1:T}>",
+    "description": "Typ Option"
+  },
+  "Println": {
+    "prefix": "pl",
+    "body": "println!(\"${1:{}}\", ${2:expr});",
+    "description": "println! macro"
+  },
+  "Debug print": {
+    "prefix": "dbg",
+    "body": "dbg!(&${1:expr});",
+    "description": "dbg! macro"
+  },
+  "Derive Debug Clone": {
+    "prefix": "der",
+    "body": "#[derive(Debug, Clone${1:, PartialEq})]",
+    "description": "Derive attribute"
+  },
+  "Module tests": {
+    "prefix": "modtest",
+    "body": [
+      "#[cfg(test)]",
+      "mod tests {",
+      "\tuse super::*;",
+      "",
+      "\t#[test]",
+      "\tfn ${1:test_nazwa}() {",
+      "\t\t$0",
+      "\t}",
+      "}"
+    ],
+    "description": "Moduł testowy"
+  },
+  "Assert eq": {
+    "prefix": "aeq",
+    "body": "assert_eq!(${1:left}, ${2:right});",
+    "description": "assert_eq!"
+  },
+  "Assert": {
+    "prefix": "ass",
+    "body": "assert!(${1:condition});",
+    "description": "assert!"
+  },
+  "Todo": {
+    "prefix": "todo",
+    "body": "todo!(\"${1:implement}\");",
+    "description": "todo! macro"
+  },
+  "Unimplemented": {
+    "prefix": "unimp",
+    "body": "unimplemented!(\"${1:reason}\");",
+    "description": "unimplemented! macro"
+  },
+  "Vec new": {
+    "prefix": "vecn",
+    "body": "let ${1:v}: Vec<${2:T}> = Vec::new();",
+    "description": "Nowy Vec"
+  },
+  "Vec macro": {
+    "prefix": "vec",
+    "body": "vec![${1:elements}]",
+    "description": "vec! macro"
+  },
+  "HashMap new": {
+    "prefix": "hashmap",
+    "body": [
+      "use std::collections::HashMap;",
+      "",
+      "let ${1:map}: HashMap<${2:K}, ${3:V}> = HashMap::new();"
+    ],
+    "description": "Nowy HashMap"
+  },
+  "For loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1:item} in ${2:iter} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Pętla for"
+  },
+  "Loop": {
+    "prefix": "loop",
+    "body": [
+      "loop {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Nieskończona pętla"
+  },
+  "While": {
+    "prefix": "while",
+    "body": [
+      "while ${1:condition} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Pętla while"
+  },
+  "Closure": {
+    "prefix": "cl",
+    "body": "|${1:args}| ${2:expr}",
+    "description": "Closure"
+  },
+  "Closure multi": {
+    "prefix": "clm",
+    "body": [
+      "|${1:args}| {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Closure wieloliniowa"
+  },
+  "Trait": {
+    "prefix": "trait",
+    "body": [
+      "pub trait ${1:Nazwa} {",
+      "\tfn ${2:method}(&self)${3: -> ${4:typ}};",
+      "}"
+    ],
+    "description": "Definicja trait"
+  },
+  "Impl trait": {
+    "prefix": "implt",
+    "body": [
+      "impl ${1:Trait} for ${2:Typ} {",
+      "\tfn ${3:method}(&self)${4: -> ${5:typ}} {",
+      "\t\t$0",
+      "\t}",
+      "}"
+    ],
+    "description": "Implementacja trait"
+  },
+  "Lifetime": {
+    "prefix": "lt",
+    "body": "'${1:a}",
+    "description": "Lifetime annotation"
+  },
+  "Use": {
+    "prefix": "use",
+    "body": "use ${1:crate}::${2:module};",
+    "description": "Import use"
+  },
+  "Mod": {
+    "prefix": "mod",
+    "body": "mod ${1:nazwa};",
+    "description": "Deklaracja modułu"
+  },
+  "Pub mod": {
+    "prefix": "pmod",
+    "body": "pub mod ${1:nazwa};",
+    "description": "Publiczna deklaracja modułu"
+  },
+  "Cfg feature": {
+    "prefix": "cfgf",
+    "body": "#[cfg(feature = \"${1:feature}\")]",
+    "description": "Warunkowa kompilacja (feature)"
+  },
+  "Cfg test": {
+    "prefix": "cfgt",
+    "body": "#[cfg(test)]",
+    "description": "Warunkowa kompilacja (test)"
+  },
+  "Allow": {
+    "prefix": "allow",
+    "body": "#[allow(${1:dead_code})]",
+    "description": "Disable lint"
+  },
+  "Doc comment": {
+    "prefix": "doc",
+    "body": [
+      "/// ${1:Opis}",
+      "///",
+      "/// # Examples",
+      "///",
+      "/// ```",
+      "/// ${2:przykład}",
+      "/// ```"
+    ],
+    "description": "Komentarz dokumentacyjny"
+  },
+  "Main function": {
+    "prefix": "main",
+    "body": [
+      "fn main() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Funkcja main"
+  },
+  "Main with Result": {
+    "prefix": "mainr",
+    "body": [
+      "fn main() -> Result<(), Box<dyn std::error::Error>> {",
+      "\t$0",
+      "\tOk(())",
+      "}"
+    ],
+    "description": "Main z Result"
+  },
+  "Tokio main": {
+    "prefix": "tmain",
+    "body": [
+      "#[tokio::main]",
+      "async fn main() -> Result<(), Box<dyn std::error::Error>> {",
+      "\t$0",
+      "\tOk(())",
+      "}"
+    ],
+    "description": "Tokio async main"
+  }
+}

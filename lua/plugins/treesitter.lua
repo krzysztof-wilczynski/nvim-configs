@@ -4,15 +4,16 @@ return {
     "hiphish/rainbow-delimiters.nvim",
   },
   build = ":TSUpdate",
-  event = { "BufReadPost", "BufNewFile" },
+  lazy = false,
   config = function()
-    require("nvim-treesitter.configs").setup({
-      ensure_installed = { "lua" },
-      highlight = { enable = true },
-      indent = { enable = true },
-      incremental_selection = { enable = true },
-      textobjects = { enable = true },
-      auto_install = true,
+    -- Instaluj parsery
+    require("nvim-treesitter").install({ "lua", "rust", "toml", "markdown", "json" })
+
+    -- Włącz highlighting dla wszystkich obsługiwanych języków
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function()
+        pcall(vim.treesitter.start)
+      end,
     })
-  end
+  end,
 }

@@ -1,6 +1,22 @@
--- vim.keymap.set("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+
+-- Clipboard dla Wayland
+if os.getenv("WAYLAND_DISPLAY") then
+  vim.g.clipboard = {
+    name = "wl-clipboard",
+    copy = {
+      ["+"] = "wl-copy",
+      ["*"] = "wl-copy",
+    },
+    paste = {
+      ["+"] = "wl-paste --no-newline",
+      ["*"] = "wl-paste --no-newline",
+    },
+    cache_enabled = 1,
+  }
+end
 
 local is_gui = vim.g.neovide or vim.g.goneovim
 
@@ -86,5 +102,5 @@ vim.g.markdown_recommended_style = 0
 
 -- ZASTOSUJ WSZYSTKIE OPCJE
 for k, v in pairs(options) do
-  vim.opt[k] = v
+  pcall(function() vim.opt[k] = v end)
 end

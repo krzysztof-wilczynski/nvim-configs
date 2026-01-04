@@ -1,32 +1,24 @@
-local lsp_common = require("config.lsp.common")
-
 return {
-  -- {
-  --   "simrat39/rust-tools.nvim",
-  --   ft = "rust",
-  --   dependencies = { "neovim/nvim-lspconfig" },
-  --   config = function()
-  --     local rust_tools = require("rust-tools")
-  --     rust_tools.setup({
-  --       server = {
-  --         on_attach = lsp_common.on_attach,
-  --         capabilities = lsp_common.capabilities,
-  --         handlers = lsp_common.handlers,
-  --         settings = require("config.lsp.servers.rust_analyzer").settings,
-  --       },
-  --       tools = {
-  --         inlay_hints = { auto = true },
-  --         hover_actions = { auto_focus = true },
-  --       },
-  --       -- opcjonalnie: integracja z DAP (debugger)
-  --       -- dap = { adapter = ... }
-  --     })
-  --   end,
-  -- },
   {
     "mrcjkb/rustaceanvim",
     version = "^6",
     lazy = false,
+    dependencies = { "mfussenegger/nvim-dap" },
+    init = function()
+      vim.g.rustaceanvim = {
+        -- DAP integration
+        dap = {
+          autoload_configurations = true,
+        },
+        -- Server config
+        server = {
+          on_attach = function(client, bufnr)
+            require("config.lsp.common").on_attach(client, bufnr)
+          end,
+          default_settings = require("config.lsp.servers.rust_analyzer").settings,
+        },
+      }
+    end,
   },
   {
     "saecki/crates.nvim",
@@ -49,7 +41,6 @@ return {
         close_timeout = 5000,
       })
     end,
-    ft = { "rust" },
     cmd = {
       "CargoBench",
       "CargoBuild",
