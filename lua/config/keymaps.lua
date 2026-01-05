@@ -46,6 +46,16 @@ keymap("n", "<C-=>", function() pcall(function() require("utils").adjust_font_si
 keymap("n", "<C-->", function() pcall(function() require("utils").adjust_font_size(-1) end) end, { silent = true })
 
 -- ┌──────────────────────────────────────────────────────────────────────────┐
+-- │                    NAWIGACJA MIĘDZY FUNKCJAMI/KLASAMI                    │
+-- └──────────────────────────────────────────────────────────────────────────┘
+
+-- Nawigacja do następnej/poprzedniej funkcji (używa mini.ai)
+keymap({ "n", "x", "o" }, "]m", function() require("mini.ai").move_cursor("left", "a", "f", { search_method = "next" }) end, { desc = "Następna funkcja" })
+keymap({ "n", "x", "o" }, "[m", function() require("mini.ai").move_cursor("left", "a", "f", { search_method = "prev" }) end, { desc = "Poprzednia funkcja" })
+keymap({ "n", "x", "o" }, "]]", function() require("mini.ai").move_cursor("left", "a", "c", { search_method = "next" }) end, { desc = "Następna klasa" })
+keymap({ "n", "x", "o" }, "[[", function() require("mini.ai").move_cursor("left", "a", "c", { search_method = "prev" }) end, { desc = "Poprzednia klasa" })
+
+-- ┌──────────────────────────────────────────────────────────────────────────┐
 -- │                      WHICH-KEY: SZUKAJ (f)                               │
 -- └──────────────────────────────────────────────────────────────────────────┘
 
@@ -84,6 +94,20 @@ wk.add({
   { "<leader>gd", function() require("snacks").picker.git_diff() end, desc = "🔄 Różnice" },
   { "<leader>gS", function() require("snacks").picker.git_stash() end, desc = "📦 Schowek (stash)" },
   { "<leader>go", function() require("snacks").gitbrowse() end, desc = "🌐 Otwórz w przeglądarce" },
+
+  -- Gitsigns (hunks)
+  { "<leader>gh", group = "Hunks" },
+  { "<leader>ghs", function() require("gitsigns").stage_hunk() end, desc = "Stage hunk" },
+  { "<leader>ghr", function() require("gitsigns").reset_hunk() end, desc = "Reset hunk" },
+  { "<leader>ghS", function() require("gitsigns").stage_buffer() end, desc = "Stage buffer" },
+  { "<leader>ghR", function() require("gitsigns").reset_buffer() end, desc = "Reset buffer" },
+  { "<leader>ghp", function() require("gitsigns").preview_hunk() end, desc = "Preview hunk" },
+  { "<leader>ghb", function() require("gitsigns").blame_line() end, desc = "Blame line" },
+  { "<leader>ghd", function() require("gitsigns").diffthis() end, desc = "Diff this" },
+
+  -- Nawigacja między hunkami
+  { "]c", function() require("gitsigns").nav_hunk("next") end, desc = "Następny hunk" },
+  { "[c", function() require("gitsigns").nav_hunk("prev") end, desc = "Poprzedni hunk" },
 })
 
 -- ┌──────────────────────────────────────────────────────────────────────────┐
@@ -265,6 +289,30 @@ wk.add({
   -- Wysyłanie do terminala
   { "<leader>tl", "<cmd>ToggleTermSendCurrentLine<CR>", desc = "📤 Wyślij linię" },
   { "<leader>tl", "<cmd>ToggleTermSendVisualLines<CR>", desc = "📤 Wyślij zaznaczenie", mode = "v" },
+})
+
+-- ┌──────────────────────────────────────────────────────────────────────────┐
+-- │                      WHICH-KEY: TROUBLE (x)                              │
+-- └──────────────────────────────────────────────────────────────────────────┘
+
+wk.add({
+  { "<leader>x", group = "🚦 Diagnostyka" },
+  { "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", desc = "Diagnostyka (workspace)" },
+  { "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Diagnostyka (dokument)" },
+  { "<leader>xs", "<cmd>Trouble symbols toggle<CR>", desc = "Symbole" },
+  { "<leader>xq", "<cmd>Trouble qflist toggle<CR>", desc = "Quickfix" },
+  { "<leader>xl", "<cmd>Trouble loclist toggle<CR>", desc = "Location list" },
+  { "<leader>xr", "<cmd>Trouble lsp_references toggle<CR>", desc = "LSP referencje" },
+})
+
+-- ┌──────────────────────────────────────────────────────────────────────────┐
+-- │                    WHICH-KEY: TODO-COMMENTS                              │
+-- └──────────────────────────────────────────────────────────────────────────┘
+
+wk.add({
+  { "]t", function() require("todo-comments").jump_next() end, desc = "Następne TODO" },
+  { "[t", function() require("todo-comments").jump_prev() end, desc = "Poprzednie TODO" },
+  { "<leader>xt", "<cmd>Trouble todo toggle<CR>", desc = "Lista TODO" },
 })
 
 -- ┌──────────────────────────────────────────────────────────────────────────┐

@@ -110,6 +110,20 @@
 | `<Space>gS` | Schowek (stash) |
 | `<Space>go` | Otwórz w przeglądarce |
 
+### Git hunks (gitsigns)
+
+| Skrót | Akcja |
+|-------|-------|
+| `]c` | Następny hunk |
+| `[c` | Poprzedni hunk |
+| `<Space>ghs` | Stage hunk |
+| `<Space>ghr` | Reset hunk |
+| `<Space>ghS` | Stage buffer |
+| `<Space>ghR` | Reset buffer |
+| `<Space>ghp` | Preview hunk |
+| `<Space>ghb` | Blame line |
+| `<Space>ghd` | Diff this |
+
 ## Okna
 
 | Skrót | Akcja |
@@ -157,6 +171,44 @@
 |-------|-------|
 | `Esc` | Wyjście do normal mode |
 | `Ctrl+h/j/k/l` | Nawigacja między oknami |
+
+## Diagnostyka (Trouble)
+
+| Skrót | Akcja |
+|-------|-------|
+| `<Space>xx` | Diagnostyka (workspace) |
+| `<Space>xd` | Diagnostyka (dokument) |
+| `<Space>xs` | Symbole |
+| `<Space>xq` | Quickfix |
+| `<Space>xl` | Location list |
+| `<Space>xr` | LSP referencje |
+| `<Space>xt` | Lista TODO |
+
+## TODO-comments
+
+| Skrót | Akcja |
+|-------|-------|
+| `]t` | Następne TODO |
+| `[t` | Poprzednie TODO |
+
+## Textobjects (mini.ai + Treesitter)
+
+### Zaznaczanie
+
+| Skrót | Akcja |
+|-------|-------|
+| `af` / `if` | Funkcja (outer/inner) |
+| `ac` / `ic` | Klasa (outer/inner) |
+| `aa` / `ia` | Parametr (outer/inner) |
+| `ao` / `io` | Pętla (outer/inner) |
+| `ai` / `ii` | Warunek if (outer/inner) |
+
+### Nawigacja
+
+| Skrót | Akcja |
+|-------|-------|
+| `]m` / `[m` | Następna/poprzednia funkcja |
+| `]]` / `[[` | Następna/poprzednia klasa |
 
 ## Inne
 

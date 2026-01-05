@@ -24,7 +24,18 @@ return {
     "echasnovski/mini.ai",
     version = false,
     config = function()
-      require("mini.ai").setup()
+      local ai = require("mini.ai")
+      ai.setup({
+        custom_textobjects = {
+          -- Treesitter textobjects
+          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
+          a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
+          o = ai.gen_spec.treesitter({ a = "@loop.outer", i = "@loop.inner" }),
+          i = ai.gen_spec.treesitter({ a = "@conditional.outer", i = "@conditional.inner" }),
+        },
+        n_lines = 500,
+      })
     end,
   },
   {
