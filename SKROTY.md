@@ -134,6 +134,30 @@
 | `<Space><Tab>d` | Zamknij |
 | `<Space><Tab>o` | Tylko ta |
 
+## Terminal
+
+| Skrót | Akcja |
+|-------|-------|
+| `F12` | Toggle terminal |
+| `<Space>tt` | Toggle terminal |
+| `<Space>th` | Terminal poziomy |
+| `<Space>tv` | Terminal pionowy |
+| `<Space>tf` | Terminal pływający |
+| `<Space>tT` | Terminal w karcie |
+| `<Space>t1-4` | Przełącz na terminal 1-4 |
+| `<Space>ts` | Wybierz terminal z listy |
+| `<Space>tn` | Nowy nazwany terminal |
+| `<Space>ta` | Toggle wszystkie terminale |
+| `<Space>tl` | Wyślij linię do terminala |
+| `<Space>tl` (visual) | Wyślij zaznaczenie |
+
+### W terminalu
+
+| Skrót | Akcja |
+|-------|-------|
+| `Esc` | Wyjście do normal mode |
+| `Ctrl+h/j/k/l` | Nawigacja między oknami |
+
 ## Inne
 
 | Skrót | Akcja |
@@ -141,7 +165,6 @@
 | `Ctrl+s` | Zapisz |
 | `Ctrl+Enter` | Nowa linia (Rust: średnik + nowa linia) |
 | `<` / `>` | Wcięcia (visual mode) |
-| `F12` | Terminal |
 | `<Space>?` | Pokaż wszystkie skróty |
 | `Esc` | Wyczyść podświetlenie wyszukiwania |
 

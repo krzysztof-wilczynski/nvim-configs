@@ -229,6 +229,45 @@ wk.add({
 })
 
 -- ┌──────────────────────────────────────────────────────────────────────────┐
+-- │                      WHICH-KEY: TERMINAL (t)                             │
+-- └──────────────────────────────────────────────────────────────────────────┘
+
+local Terminal = require("toggleterm.terminal").Terminal
+
+wk.add({
+  { "<leader>t", group = "🖥️ Terminal" },
+
+  -- Kierunki otwarcia
+  { "<leader>tt", "<cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
+  { "<leader>th", "<cmd>ToggleTerm direction=horizontal<CR>", desc = "➖ Terminal poziomy" },
+  { "<leader>tv", "<cmd>ToggleTerm direction=vertical<CR>", desc = "➕ Terminal pionowy" },
+  { "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", desc = "🪟 Terminal pływający" },
+  { "<leader>tT", "<cmd>ToggleTerm direction=tab<CR>", desc = "📑 Terminal w karcie" },
+
+  -- Numerowane terminale (przełączanie)
+  { "<leader>t1", "<cmd>1ToggleTerm<CR>", desc = "Terminal 1" },
+  { "<leader>t2", "<cmd>2ToggleTerm<CR>", desc = "Terminal 2" },
+  { "<leader>t3", "<cmd>3ToggleTerm<CR>", desc = "Terminal 3" },
+  { "<leader>t4", "<cmd>4ToggleTerm<CR>", desc = "Terminal 4" },
+
+  -- Operacje
+  { "<leader>ta", "<cmd>ToggleTermToggleAll<CR>", desc = "🔄 Toggle wszystkie" },
+  { "<leader>ts", "<cmd>TermSelect<CR>", desc = "📋 Wybierz terminal" },
+  { "<leader>tn", function()
+    vim.ui.input({ prompt = "Nazwa terminala: " }, function(name)
+      if name and name ~= "" then
+        local term = Terminal:new({ display_name = name })
+        term:toggle()
+      end
+    end)
+  end, desc = "✨ Nowy nazwany terminal" },
+
+  -- Wysyłanie do terminala
+  { "<leader>tl", "<cmd>ToggleTermSendCurrentLine<CR>", desc = "📤 Wyślij linię" },
+  { "<leader>tl", "<cmd>ToggleTermSendVisualLines<CR>", desc = "📤 Wyślij zaznaczenie", mode = "v" },
+})
+
+-- ┌──────────────────────────────────────────────────────────────────────────┐
 -- │                        WHICH-KEY: INNE                                   │
 -- └──────────────────────────────────────────────────────────────────────────┘
 

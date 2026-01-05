@@ -15,7 +15,6 @@ return {
       vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
 
       require("toggleterm").setup({
-        -- size can be a number or function which is passed the current terminal
         size = function(term)
           if term.direction == "horizontal" then
             return 15
@@ -24,37 +23,23 @@ return {
           end
         end,
         open_mapping = [[<F12>]],
-        ---@diagnostic disable-next-line: unused-local
-        on_open = function(term) end,
-        ---@diagnostic disable-next-line: unused-local
-        on_close = function(term) end,
         highlights = {
-          -- highlights which map to a highlight group name and a table of it's values
-          -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
-          Normal = {
-            link = "Normal",
-          },
-          NormalFloat = {
-            link = "Normal",
-          },
+          Normal = { link = "Normal" },
+          NormalFloat = { link = "Normal" },
         },
-        shade_filetypes = {},
         shade_terminals = false,
-        shading_factor = 1,       -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
         start_in_insert = true,
-        insert_mappings = true,   -- whether or not the open mapping applies in insert mode
+        insert_mappings = true,
         persist_size = true,
-        direction = "horizontal", -- | 'horizontal' | 'window' | 'float',
-        close_on_exit = true,     -- close the terminal window when the process exits
-        shell = vim.o.shell,      -- change the default shell
-        -- This field is only relevant if direction is set to 'float'
-        winbar = {
-          enabled = true,
-        },
+        direction = "horizontal",
+        close_on_exit = true,
+        shell = vim.o.shell,
+        winbar = { enabled = true },
       })
     end,
     keys = {
-      { "<F12>" },
+      { "<F12>", desc = "Toggle terminal" },
+      { "<leader>t", desc = "+Terminal" },
     },
   },
 }
