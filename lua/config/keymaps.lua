@@ -323,3 +323,12 @@ wk.add({
   { "<leader>n", "<cmd>Neotree toggle position=right<CR>", desc = "📁 Eksplorator plików" },
   { "<leader>?", function() wk.show({ global = true }) end, desc = "⌨️ Wszystkie skróty" },
 })
+
+-- Markdown keymaps (tylko dla plików .md)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function(args)
+    vim.keymap.set("n", "<leader>m", "<cmd>RenderMarkdown toggle<CR>",
+      { buffer = args.buf, desc = "📝 Toggle Markdown preview" })
+  end,
+})

@@ -210,6 +210,12 @@
 | `]m` / `[m` | Następna/poprzednia funkcja |
 | `]]` / `[[` | Następna/poprzednia klasa |
 
+## Markdown
+
+| Skrót | Akcja |
+|-------|-------|
+| `<Space>m` | Toggle podgląd Markdown (renderowany/źródłowy) |
+
 ## Inne
 
 | Skrót | Akcja |
