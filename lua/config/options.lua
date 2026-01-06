@@ -104,3 +104,33 @@ vim.g.markdown_recommended_style = 0
 for k, v in pairs(options) do
   pcall(function() vim.opt[k] = v end)
 end
+
+-- DIAGNOSTYKA (błędy LSP)
+vim.diagnostic.config({
+  virtual_text = false,     -- true = tekst błędu na końcu linii
+  float = {
+    border = "rounded",
+    source = true,          -- pokaż źródło błędu (np. "rust-analyzer")
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+-- Automatyczne pokazywanie błędu przy zatrzymaniu kursora (opcjonalne)
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--   callback = function()
+--     vim.diagnostic.open_float(nil, { focus = false })
+--   end,
+-- })
+
+-- Auto-fix błędów przy zapisie (opcjonalne - odkomentuj jeśli chcesz)
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   callback = function()
+--     vim.lsp.buf.code_action({
+--       context = { only = { "source.fixAll" } },
+--       apply = true,
+--     })
+--   end,
+-- })

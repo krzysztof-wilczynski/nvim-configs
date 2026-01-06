@@ -12,7 +12,7 @@ return {
         view = "mini",
       },
       lsp = {
-        progress = { enabled = true },
+        progress = { enabled = false },
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
@@ -25,6 +25,10 @@ return {
       presets = {
         bottom_search = true,
         long_message_to_split = true,
+      },
+      routes = {
+        -- Ukryj powiadomienia treesitter o kompilacji parserów
+        { filter = { find = "nvim%-treesitter" }, opts = { skip = true } },
       },
       views = {
         mini = {

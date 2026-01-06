@@ -74,9 +74,7 @@ return {
           end,
         },
         lsp_progress = {
-          enable = true,
-          level = "INFO",
-          duration_last = 2000,
+          enable = false,
         },
         window = {
           config = function()

@@ -137,6 +137,10 @@
 | `<Space>wq` | Zamknij okno |
 | `<Space>wo` | Tylko to okno |
 | `<Space>w=` | Wyrównaj rozmiary |
+| `Ctrl+↑` | Zwiększ wysokość |
+| `Ctrl+↓` | Zmniejsz wysokość |
+| `Ctrl+←` | Zmniejsz szerokość |
+| `Ctrl+→` | Zwiększ szerokość |
 
 ## Zakładki (taby)
 
@@ -209,6 +213,19 @@
 |-------|-------|
 | `]m` / `[m` | Następna/poprzednia funkcja |
 | `]]` / `[[` | Następna/poprzednia klasa |
+
+## Sesje (auto-session)
+
+| Skrót | Akcja |
+|-------|-------|
+| `<Space>Sl` | Lista sesji (picker) |
+| `<Space>Ss` | Zapisz sesję |
+| `<Space>Sr` | Przywróć sesję |
+| `<Space>Sd` | Usuń sesję |
+
+Sesje zapisują się automatycznie przy wyjściu z nvim.
+Neo-tree i terminale są zamykane przed zapisem (nie psują layoutu).
+Na dashboardzie: `s` - przywróć sesję dla bieżącego katalogu.
 
 ## Markdown
 

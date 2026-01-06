@@ -122,7 +122,26 @@ wk.add({
   { "gI", function() require("snacks").picker.lsp_implementations() end, desc = "🔧 Implementacje" },
   { "gy", function() require("snacks").picker.lsp_type_definitions() end, desc = "📐 Definicja typu" },
   { "<leader>q", vim.diagnostic.setloclist, desc = "📋 Lista diagnostyki" },
-  { "<leader>ca", vim.lsp.buf.code_action, desc = "💡 Akcja kodu" },
+
+  -- Akcje kodu (g*)
+  { "ga", vim.lsp.buf.code_action, desc = "💡 Akcje kodu" },
+  { "gf", function()
+    vim.lsp.buf.code_action({
+      filter = function(a) return a.isPreferred end,
+      apply = true,
+    })
+  end, desc = "🔧 Szybka poprawka" },
+  { "gF", function()
+    vim.lsp.buf.code_action({
+      context = { only = { "source.fixAll" } },
+      apply = true,
+    })
+  end, desc = "🔧 Napraw wszystko w pliku" },
+  { "ge", vim.diagnostic.open_float, desc = "🔍 Pokaż błąd" },
+
+  -- Nawigacja między błędami
+  { "]d", vim.diagnostic.goto_next, desc = "Następny błąd" },
+  { "[d", vim.diagnostic.goto_prev, desc = "Poprzedni błąd" },
 })
 
 -- ┌──────────────────────────────────────────────────────────────────────────┐
@@ -137,6 +156,12 @@ wk.add({
   { "<leader>wo", "<C-W>o", desc = "🎯 Tylko to okno" },
   { "<leader>w=", "<C-W>=", desc = "⚖️ Wyrównaj rozmiary" },
 })
+
+-- Zmiana rozmiaru okien (Ctrl + strzałki)
+keymap("n", "<C-Up>", "<cmd>resize +2<CR>", { desc = "Zwiększ wysokość" })
+keymap("n", "<C-Down>", "<cmd>resize -2<CR>", { desc = "Zmniejsz wysokość" })
+keymap("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Zmniejsz szerokość" })
+keymap("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Zwiększ szerokość" })
 
 -- ┌──────────────────────────────────────────────────────────────────────────┐
 -- │                     WHICH-KEY: ZAKŁADKI (tab)                            │
@@ -213,8 +238,8 @@ local function rust_keymaps(bufnr)
     { "<leader>cD", function() vim.cmd.RustLsp("debuggables") end, desc = "🐛 Debug (wybierz)", opts },
     { "<leader>cdr", function() vim.cmd.RustLsp({ "debuggables", bang = true }) end, desc = "🔁 Powtórz debug", opts },
     { "<leader>cRR", function() vim.cmd.RustLsp("runnables") end, desc = "🏃 Uruchamialne", opts },
-    { "<leader>ce", function() vim.cmd.RustLsp("explainError") end, desc = "❓ Wyjaśnij błąd", opts },
-    { "<leader>cE", function() vim.cmd.RustLsp("renderDiagnostic") end, desc = "📋 Diagnostyka", opts },
+    { "gE", function() vim.cmd.RustLsp("explainError") end, desc = "❓ Wyjaśnij błąd (Rust)", opts },
+    { "gR", function() vim.cmd.RustLsp("renderDiagnostic") end, desc = "📋 Renderuj diagnostykę", opts },
     { "<leader>ch", function() vim.cmd.RustLsp({ "hover", "actions" }) end, desc = "💬 Akcje hover", opts },
     { "<leader>cm", function() vim.cmd.RustLsp("expandMacro") end, desc = "🔬 Rozwiń makro", opts },
     { "<leader>cj", "<cmd>RustLsp joinLines<CR>", desc = "⛓️ Złącz linie", opts },
@@ -322,6 +347,9 @@ wk.add({
 wk.add({
   { "<leader>n", "<cmd>Neotree toggle position=right<CR>", desc = "📁 Eksplorator plików" },
   { "<leader>?", function() wk.show({ global = true }) end, desc = "⌨️ Wszystkie skróty" },
+
+  -- Sesje (auto-session) - keybindy zdefiniowane w pluginie
+  { "<leader>S", group = "💾 Sesje" },
 })
 
 -- Markdown keymaps (tylko dla plików .md)

@@ -20,7 +20,7 @@ return {
             desc = "Ustawienia",
             action = ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd",
           },
-          { icon = " ", key = "s", desc = "Przywróć sesję", section = "session" },
+          { icon = " ", key = "s", desc = "Przywróć sesję", action = ":AutoSession restore" },
           {
             icon = "󰒲 ",
             key = "L",
@@ -65,6 +65,14 @@ return {
     },
     picker = {
       enabled = true,
+      win = {
+        preview = {
+          wo = {
+            wrap = true,         -- zawijanie wierszy w podglądzie
+            linebreak = true,    -- zawijaj na granicy słów
+          },
+        },
+      },
     },
     git = {
       enabled = true,
@@ -84,6 +92,10 @@ return {
     },
     notifier = {
       enabled = true,
+      filter = function(notif)
+        -- Ukryj powiadomienia progress od rust-analyzer
+        return not (notif.level == "info" and notif.title and notif.title:match("rust%-analyzer"))
+      end,
     },
     statuscolumn = {
       enabled = true,

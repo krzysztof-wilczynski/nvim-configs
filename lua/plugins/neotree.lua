@@ -7,7 +7,8 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim"
+      "MunifTanjim/nui.nvim",
+      "s1n7ax/nvim-window-picker",
     },
     config = function()
       require("neo-tree").setup({
@@ -25,6 +26,7 @@ return {
             ["s"] = "open_split",
             ["v"] = "open_vsplit",
             ["o"] = "system_open",
+            ["w"] = "open_with_window_picker",
             ["<space>"] = "noop",             -- wyłącz toggle spacją
           },
         },
