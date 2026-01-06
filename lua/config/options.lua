@@ -2,21 +2,38 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
--- Clipboard dla Wayland
-if os.getenv("WAYLAND_DISPLAY") then
-  vim.g.clipboard = {
-    name = "wl-clipboard",
-    copy = {
-      ["+"] = "wl-copy",
-      ["*"] = "wl-copy",
-    },
-    paste = {
-      ["+"] = "wl-paste --no-newline",
-      ["*"] = "wl-paste --no-newline",
-    },
-    cache_enabled = 1,
-  }
+-- Konfiguracja clipboard w zależności od platformy
+local function setup_clipboard()
+  local sysname = vim.loop.os_uname().sysname
+
+  if sysname == "Windows_NT" then
+    -- Windows - Neovim automatycznie używa win32yank lub PowerShell
+    -- Nic nie trzeba konfigurować, domyślna obsługa działa
+    return
+  elseif sysname == "Darwin" then
+    -- macOS - używa pbcopy/pbpaste (domyślnie w Neovim)
+    return
+  else
+    -- Linux - sprawdź czy Wayland czy X11
+    if os.getenv("WAYLAND_DISPLAY") then
+      vim.g.clipboard = {
+        name = "wl-clipboard",
+        copy = {
+          ["+"] = "wl-copy",
+          ["*"] = "wl-copy",
+        },
+        paste = {
+          ["+"] = "wl-paste --no-newline",
+          ["*"] = "wl-paste --no-newline",
+        },
+        cache_enabled = 1,
+      }
+    end
+    -- X11 - Neovim automatycznie używa xclip/xsel jeśli dostępne
+  end
 end
+
+setup_clipboard()
 
 local is_gui = vim.g.neovide or vim.g.goneovim
 

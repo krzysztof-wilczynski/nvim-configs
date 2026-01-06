@@ -198,7 +198,7 @@ impl User {
 ```rust
 let name = John;
 let message = Hello World;
-let data = vec[1, 2, 3];
+let data = vec( 1, 2, 3 );
 ```
 
 | Ćwiczenie | Komenda | Cel |
@@ -613,6 +613,584 @@ Musisz skopiować struct z jednego pliku i użyć go w innym, dodając implement
 9. **Zamknij split:**
    - `<Space>wq` - zamknij bieżące okno
    - Lub `<Space>wo` - zostaw tylko bieżące
+
+---
+
+## Scenariusz 6: Makra i rejestry - zaawansowane
+
+### Kontekst
+Makra to nagrywanie sekwencji klawiszy i ich odtwarzanie. To jeden z najpotężniejszych mechanizmów Vim do automatyzacji powtarzalnych zadań.
+
+### Ćwiczenie 6.1: Dodawanie typów do zmiennych
+
+**Kod startowy:**
+```rust
+let name = "Alice";
+let age = 30;
+let active = true;
+let score = 95.5;
+let count = 100;
+let message = "Hello";
+let flag = false;
+let total = 42;
+```
+
+**Cel:** Dodaj typy do wszystkich zmiennych: `let name: &str = "Alice";`
+
+**Kroki:**
+1. Ustaw kursor na pierwszej linii, na `name`
+2. `qa` - rozpocznij nagrywanie do rejestru `a`
+3. `f=` - skocz do znaku `=`
+4. `i: &str` + `Esc` - wstaw typ (dla pierwszej linii)
+5. `j0` - następna linia, początek
+6. `q` - zakończ nagrywanie
+
+**Ale każda linia ma inny typ!** Użyjmy innej strategii:
+
+**Lepsza metoda z rejestrem:**
+1. Na linii z `"Alice"`: `f=i: &str<Esc>j0`
+2. Na linii z `30`: `f=i: i32<Esc>j0`
+3. itd.
+
+**Makro uniwersalne (z ręcznym typem):**
+1. `qa` - nagrywaj
+2. `f=a: ` + `Esc` - dodaj `: ` po nazwie
+3. `q` - stop
+4. Teraz `@a` doda `: ` i czeka na typ
+
+---
+
+### Ćwiczenie 6.2: Konwersja struktury na builder pattern
+
+**Kod startowy:**
+```rust
+pub struct Config {
+    pub host: String,
+    pub port: u16,
+    pub timeout: u64,
+    pub retries: u32,
+    pub debug: bool,
+    pub log_level: String,
+    pub max_connections: usize,
+    pub buffer_size: usize,
+}
+```
+
+**Cel:** Dla każdego pola wygeneruj metodę buildera:
+```rust
+pub fn host(mut self, value: String) -> Self {
+    self.host = value;
+    self
+}
+```
+
+**Kroki:**
+1. Skopiuj listę pól do nowego miejsca: `vi{y` + przejdź niżej + `p`
+2. Ustaw kursor na `pub host: String,`
+3. `qa` - nagrywaj do `a`
+4. `0` - początek linii
+5. `cwpub fn` + `Esc` - zamień `pub` na `pub fn`
+6. `w` - następne słowo (nazwa pola)
+7. `ye` - kopiuj nazwę pola
+8. `f:` - skocz do `:`
+9. `C(mut self, value:` + `Esc` - zamień resztę
+10. `A) -> Self {` + `Esc` - dokończ sygnaturę
+11. `o    self.` + `Esc` + `p` + `a = value;` + `Esc` - ciało
+12. `o    self` + `Esc` - return
+13. `o}` + `Esc` - zamknij
+14. `j0` - następna linia
+15. `q` - zakończ
+
+16. `6@a` - zastosuj do pozostałych 6 pól
+
+**Oczekiwany rezultat (fragment):**
+```rust
+pub fn host(mut self, value: String) -> Self {
+    self.host = value;
+    self
+}
+pub fn port(mut self, value: u16) -> Self {
+    self.port = value;
+    self
+}
+```
+
+---
+
+### Ćwiczenie 6.3: Rejestry - kopiowanie do wielu miejsc
+
+**Kod startowy:**
+```rust
+fn process() {
+    let data = fetch_data();
+
+    // TODO: add error handling
+    let result = transform(data);
+
+    // TODO: add error handling
+    let output = format(result);
+
+    // TODO: add error handling
+    save(output);
+}
+```
+
+**Cel:** Zamień wszystkie `// TODO: add error handling` na właściwy kod obsługi błędów, ale każdy inny.
+
+**Użycie rejestrów nazwanych:**
+1. Zapisz różne fragmenty do różnych rejestrów:
+   - `"ay` + zaznacz: `.map_err(|e| log::error!("Fetch failed: {}", e))?`
+   - `"by` + zaznacz: `.map_err(|e| log::error!("Transform failed: {}", e))?`
+   - `"cy` + zaznacz: `.map_err(|e| log::error!("Save failed: {}", e))?`
+
+2. Przejdź do każdego TODO i:
+   - Pierwsze: `dd"ap` - usuń linię, wklej z `a`
+   - Drugie: `dd"bp` - usuń linię, wklej z `b`
+   - Trzecie: `dd"cp` - usuń linię, wklej z `c`
+
+**Podgląd rejestrów:**
+- `:reg` - zobacz wszystkie rejestry
+- `:reg a` - zobacz tylko rejestr `a`
+
+---
+
+### Ćwiczenie 6.4: Makro rekurencyjne
+
+**Kod startowy:**
+```rust
+println!("value: {}", a);
+println!("value: {}", b);
+println!("value: {}", c);
+println!("value: {}", d);
+println!("value: {}", e);
+```
+
+**Cel:** Zmień `println!` na `debug!` we wszystkich liniach automatycznie.
+
+**Makro rekurencyjne:**
+1. `qaq` - wyczyść rejestr `a`
+2. `gg` - idź na początek
+3. `qa` - nagrywaj
+4. `:s/println/debug/` + `Enter` - zamień w linii
+5. `j` - następna linia
+6. `@a` - wywołaj siebie (rekurencja!)
+7. `q` - zakończ
+8. `@a` - uruchom (zatrzyma się na końcu pliku)
+
+---
+
+## Scenariusz 7: Text Objects (mini.ai) - zaawansowane
+
+### Kontekst
+Mini.ai rozszerza standardowe text objects Vima o inteligentne obiekty oparte na Treesitter.
+
+### Ćwiczenie 7.1: Manipulacja funkcjami
+
+**Kod startowy:**
+```rust
+impl Calculator {
+    fn add(&self, a: i32, b: i32) -> i32 {
+        let sum = a + b;
+        println!("Adding {} + {}", a, b);
+        sum
+    }
+
+    fn subtract(&self, a: i32, b: i32) -> i32 {
+        let diff = a - b;
+        println!("Subtracting {} - {}", a, b);
+        diff
+    }
+
+    fn multiply(&self, a: i32, b: i32) -> i32 {
+        let product = a * b;
+        println!("Multiplying {} * {}", a, b);
+        product
+    }
+
+    fn divide(&self, a: i32, b: i32) -> Option<i32> {
+        if b == 0 {
+            None
+        } else {
+            Some(a / b)
+        }
+    }
+}
+```
+
+**Zadania:**
+
+1. **Usuń całą funkcję `multiply`:**
+   - Ustaw kursor gdziekolwiek w funkcji `multiply`
+   - `daf` - delete around function
+
+2. **Skopiuj ciało funkcji `add` do `subtract`:**
+   - W funkcji `add`: `yif` - yank inner function (tylko ciało)
+   - W funkcji `subtract`: `vif` - zaznacz ciało
+   - `p` - wklej (zamieni)
+
+3. **Zamień całą funkcję `divide` na nową:**
+   - W funkcji `divide`: `caf` - change around function
+   - Wpisz nową implementację
+
+4. **Przenieś funkcję `add` na koniec impl:**
+   - `daf` - wytnij funkcję
+   - `]m]m]m` - skocz do ostatniej funkcji
+   - `}` - koniec funkcji
+   - `p` - wklej
+
+---
+
+### Ćwiczenie 7.2: Praca z parametrami
+
+**Kod startowy:**
+```rust
+fn create_user(
+    name: String,
+    email: String,
+    age: u32,
+    is_admin: bool,
+    department: String,
+    salary: f64,
+) -> User {
+    User::new(name, email, age, is_admin, department, salary)
+}
+
+fn send_email(to: &str, subject: &str, body: &str, cc: Option<&str>) {
+    // implementation
+}
+```
+
+**Zadania:**
+
+1. **Usuń parametr `is_admin` z `create_user`:**
+   - Ustaw kursor na `is_admin`
+   - `daa` - delete around argument (usunie też przecinek)
+
+2. **Zmień parametr `age: u32` na `birth_year: i32`:**
+   - Ustaw kursor na `age`
+   - `cia` - change inner argument
+   - Wpisz: `birth_year: i32`
+
+3. **Skopiuj parametr `email` i dodaj jako `backup_email`:**
+   - Na `email: String`: `yia` - kopiuj argument
+   - Przejdź na koniec listy parametrów
+   - `a, ` + `Esc` + `p` - wklej
+   - Zmień nazwę na `backup_email`
+
+4. **Zaznacz wszystkie parametry `send_email`:**
+   - Wewnątrz nawiasów: `vi(` - zaznacz wewnątrz ()
+
+---
+
+### Ćwiczenie 7.3: Praca z blokami warunkowymi i pętlami
+
+**Kod startowy:**
+```rust
+fn process_items(items: Vec<Item>) -> Result<(), Error> {
+    for item in items {
+        if item.is_valid() {
+            match item.item_type {
+                ItemType::A => {
+                    println!("Processing A");
+                    handle_a(item)?;
+                }
+                ItemType::B => {
+                    println!("Processing B");
+                    handle_b(item)?;
+                }
+                _ => {
+                    println!("Unknown type");
+                }
+            }
+        } else {
+            log::warn!("Invalid item: {:?}", item);
+            continue;
+        }
+    }
+
+    Ok(())
+}
+```
+
+**Zadania:**
+
+1. **Usuń całą pętlę for:**
+   - Ustaw kursor gdziekolwiek w pętli
+   - `dao` - delete around loop
+
+2. **Skopiuj blok if do nowej funkcji:**
+   - W bloku if: `yai` - yank around if (cały if-else)
+   - Stwórz nową funkcję i `p`
+
+3. **Zamień ciało else:**
+   - W bloku else: `cii` - change inner if (ciało else)
+   - Wpisz nowy kod
+
+4. **Nawigacja między blokami:**
+   - `]m` - następna funkcja
+   - `[m` - poprzednia funkcja
+   - Wewnątrz funkcji użyj `%` do skakania między nawiasami
+
+---
+
+### Ćwiczenie 7.4: Praca ze strukturami i impl
+
+**Kod startowy:**
+```rust
+#[derive(Debug, Clone)]
+pub struct Server {
+    host: String,
+    port: u16,
+    connections: Vec<Connection>,
+}
+
+impl Server {
+    pub fn new(host: String, port: u16) -> Self {
+        Self {
+            host,
+            port,
+            connections: Vec::new(),
+        }
+    }
+
+    pub fn start(&mut self) -> Result<(), Error> {
+        println!("Starting server on {}:{}", self.host, self.port);
+        Ok(())
+    }
+}
+
+impl Drop for Server {
+    fn drop(&mut self) {
+        println!("Server shutting down");
+    }
+}
+```
+
+**Zadania:**
+
+1. **Skopiuj cały struct:**
+   - Na linii `pub struct Server`: `vac` - zaznacz całą klasę/struct
+   - `y` - kopiuj
+
+2. **Usuń drugi impl (Drop):**
+   - Gdziekolwiek w `impl Drop`: `dac` - delete around class
+
+3. **Zaznacz wszystkie pola struct:**
+   - Wewnątrz struct: `vi{` - zaznacz wewnątrz {}
+
+4. **Skocz między impl:**
+   - `]]` - następny struct/impl
+   - `[[` - poprzedni struct/impl
+
+---
+
+## Scenariusz 8: Surround (mini.surround) - zaawansowane
+
+### Kontekst
+Mini.surround pozwala dodawać, usuwać i zamieniać otaczające znaki (cudzysłowy, nawiasy, tagi).
+
+### Ćwiczenie 8.1: Konwersja stringów
+
+**Kod startowy:**
+```rust
+let query = "SELECT * FROM users WHERE id = " + id;
+let message = "Hello " + name + "!";
+let path = "/home/" + user + "/documents";
+let sql = "INSERT INTO logs VALUES (" + timestamp + ", " + level + ")";
+```
+
+**Cel:** Zamień konkatenację na format!()
+
+**Przed:**
+```rust
+let query = "SELECT * FROM users WHERE id = " + id;
+```
+
+**Po:**
+```rust
+let query = format!("SELECT * FROM users WHERE id = {}", id);
+```
+
+**Kroki dla każdej linii:**
+1. Usuń wszystkie `" + ` i ` + "`:
+   - `:%s/" + /{}"/g` - zamień końce stringów
+   - `:%s/ + "/"/g` - zamień początki
+
+2. Dla każdej linii dodaj `format!()`:
+   - Na początku stringa: `saiw)` - otocz słowo nawiasem... nie, lepsza metoda:
+   - `f"` - znajdź cudzysłów
+   - `va"` - zaznacz cały string z cudzysłowami
+   - `sa)` - otocz nawiasami
+   - `iformat!` - dodaj format! przed
+
+**Lub użyj makra:**
+1. `qa`
+2. `0f"va"sa)iformat!<Esc>`
+3. `j0`
+4. `q`
+5. `3@a`
+
+---
+
+### Ćwiczenie 8.2: Zamiana typów Option/Result
+
+**Kod startowy:**
+```rust
+fn get_user(id: i32) -> User {
+    database.find(id)
+}
+
+fn parse_number(s: &str) -> i32 {
+    s.parse().unwrap()
+}
+
+fn read_file(path: &str) -> String {
+    std::fs::read_to_string(path).unwrap()
+}
+
+fn divide(a: i32, b: i32) -> i32 {
+    a / b
+}
+```
+
+**Cel:** Zamień typy zwracane na Option<T> lub Result<T, Error>
+
+**Kroki:**
+1. Dla `-> User` zamień na `-> Option<User>`:
+   - Ustaw kursor na `User` (typ zwracany)
+   - `saiw>` - otocz nawiasami kątowymi `<User>`
+   - `iOption` - dodaj Option przed
+
+2. Dla `-> i32` zamień na `-> Result<i32, Error>`:
+   - `saiw>` - `<i32>`
+   - `iResult` - `Result<i32>`
+   - `f>i, Error` - `Result<i32, Error>`
+
+**Makro dla Option:**
+1. `qa`
+2. `f>b` - znajdź `>` i cofnij (jesteśmy na typie)
+3. `saiw>iOption<Esc>` - otocz i dodaj Option
+4. `q`
+
+---
+
+### Ćwiczenie 8.3: Praca z zagnieżdżonymi strukturami
+
+**Kod startowy:**
+```rust
+let data = vec![1, 2, 3];
+let result = Some(Ok("success"));
+let nested = vec![vec![1, 2], vec![3, 4]];
+let complex = Some(vec![Ok(1), Err("error")]);
+```
+
+**Zadania:**
+
+1. **Rozpakuj zewnętrzny vec![]:**
+   - Na `vec![1, 2, 3]`: `sd]` - usuń nawiasy []
+   - Zostanie: `vec!1, 2, 3` - ups, to nie działa!
+
+   **Lepsza metoda:**
+   - `vi[` - zaznacz wewnątrz []
+   - `y` - kopiuj
+   - `va[` - zaznacz z nawiasami
+   - `p` - wklej (zamieni całość na zawartość)
+
+2. **Zamień Some() na Ok():**
+   - Na `Some`: `ciw` + `Ok` - zmień słowo
+
+3. **Dodaj dodatkowe zagnieżdżenie:**
+   - `let data = vec![1, 2, 3]` → `let data = Some(vec![1, 2, 3])`
+   - Zaznacz `vec![1, 2, 3]`: `va[`
+   - `sa)` - otocz nawiasami
+   - `iSome` - dodaj Some
+
+---
+
+### Ćwiczenie 8.4: Konwersja closure na funkcję
+
+**Kod startowy:**
+```rust
+let double = |x| x * 2;
+let add = |a, b| a + b;
+let greet = |name| println!("Hello, {}", name);
+let complex = |x, y, z| {
+    let sum = x + y;
+    sum * z
+};
+```
+
+**Cel:** Zamień closure na pełne funkcje
+
+**Przed:** `let double = |x| x * 2;`
+**Po:**
+```rust
+fn double(x: i32) -> i32 {
+    x * 2
+}
+```
+
+**Kroki:**
+1. Zamień `let double = ` na `fn double`:
+   - `0` - początek linii
+   - `cw` - change word
+   - `fn` - wpisz fn
+   - `w` - następne słowo
+   - `dw` - usuń `= `
+
+2. Zamień `|x|` na `(x: i32)`:
+   - `sr|)` - zamień | na ()
+   - `ea: i32` - dodaj typ po x
+
+3. Zamień `x * 2;` na `-> i32 { x * 2 }`:
+   - `f;` - znajdź średnik
+   - `C -> i32 {` - zamień do końca
+   - `o    x * 2` + `Esc`
+   - `o}` + `Esc`
+
+**Lub użyj visual mode:**
+1. Zaznacz całą linię closure: `V`
+2. Przekształć ręcznie lub użyj substytucji
+
+---
+
+### Ćwiczenie 8.5: Manipulacja atrybutami Rust
+
+**Kod startowy:**
+```rust
+struct User {
+    name: String,
+    email: String,
+    age: u32,
+}
+
+fn main() {
+    println!("Hello");
+}
+
+fn helper() {
+    // code
+}
+```
+
+**Cel:** Dodaj atrybuty do struct i funkcji
+
+**Dodaj #[derive(Debug, Clone)]:**
+1. Na linii `struct User`:
+   - `O` - nowa linia powyżej, insert mode
+   - `#[derive(Debug, Clone)]` + `Esc`
+
+**Dodaj #[cfg(test)] do funkcji:**
+1. Można użyć surround na całej funkcji:
+   - `vaf` - zaznacz całą funkcję
+   - Nie ma wbudowanego otoczenia dla atrybutów, więc:
+   - `O#[cfg(test)]` + `Esc` - dodaj ręcznie
+
+**Zamień istniejący atrybut:**
+Jeśli masz `#[derive(Debug)]` i chcesz `#[derive(Debug, Clone, Serialize)]`:
+1. `f(` - znajdź nawias
+2. `ci(` - zmień wewnątrz ()
+3. Wpisz nową zawartość
 
 ---
 

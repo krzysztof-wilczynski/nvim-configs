@@ -4,6 +4,7 @@
 
 | Skrót | Akcja |
 |-------|-------|
+| `<Space><space>` | Inteligentne wyszukiwanie |
 | `<Space>ff` | Szukaj pliku |
 | `<Space>fg` | Szukaj w treści (grep) |
 | `<Space>fr` | Ostatnie pliki |
@@ -11,6 +12,13 @@
 | `<Space>fp` | Projekty |
 | `<Space>fb` | Bufory |
 | `<Space>fn` | Powiadomienia |
+| `<Space>fc` | Pliki konfiguracji |
+| `<Space>fh` | Pomoc |
+| `<Space>fk` | Skróty klawiszowe |
+| `<Space>fa` | Polecenia |
+| `<Space>fq` | Lista quickfix |
+| `<Space>ft` | Szukaj TODO |
+| `<Space>f]` | Motywy kolorów |
 
 ## Nawigacja po kodzie (LSP)
 
@@ -77,6 +85,7 @@
 | `<Space>cdo` | Przestarzałe |
 | `<Space>cdt` | Drzewo zależności |
 | `<Space>cdA` | Audyt bezpieczeństwa |
+| `<Space>cdv` | Vendor |
 
 ### Projekt
 
@@ -86,6 +95,7 @@
 | `<Space>cpd` | Dokumentacja |
 | `<Space>cpp` | Publikuj |
 | `<Space>cpi` | Instaluj binarkę |
+| `<Space>cpu` | Odinstaluj |
 | `<Space>cps` | Szukaj crate |
 
 ## Debugowanie
@@ -160,6 +170,8 @@
 | `<Space><Tab><Tab>` | Nowa zakładka |
 | `<Space><Tab>e` | Następna |
 | `<Space><Tab>q` | Poprzednia |
+| `<Space><Tab>l` | Ostatnia |
+| `<Space><Tab>f` | Pierwsza |
 | `<Space><Tab>d` | Zamknij |
 | `<Space><Tab>o` | Tylko ta |
 

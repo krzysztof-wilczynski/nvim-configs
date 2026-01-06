@@ -52,10 +52,13 @@ return {
             local sysname = vim.loop.os_uname().sysname
 
             if sysname == "Windows_NT" then
-              -- Otwórz plik lub folder w domyślnej aplikacji Windows
+              -- Windows - użyj cmd.exe start
               vim.fn.jobstart({ "cmd.exe", "/C", "start", "", path }, { detach = true })
+            elseif sysname == "Darwin" then
+              -- macOS - użyj open
+              vim.fn.jobstart({ "open", path }, { detach = true })
             else
-              -- Zakładamy Linux (xdg-open)
+              -- Linux - użyj xdg-open
               vim.fn.jobstart({ "xdg-open", path }, { detach = true })
             end
           end,
