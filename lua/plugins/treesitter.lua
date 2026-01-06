@@ -6,14 +6,10 @@ return {
   build = ":TSUpdate",
   lazy = false,
   config = function()
-    -- Instaluj parsery
-    require("nvim-treesitter").install({ "lua", "rust", "toml", "markdown", "json" })
-
-    -- Włącz highlighting dla wszystkich obsługiwanych języków
-    vim.api.nvim_create_autocmd("FileType", {
-      callback = function()
-        pcall(vim.treesitter.start)
-      end,
+    -- Auto-instalacja parserów (wymaga tree-sitter-cli)
+    require("nvim-treesitter").setup({
+      ensure_installed = { "lua", "rust", "toml", "markdown", "json", "vim", "vimdoc" },
+      auto_install = true,
     })
   end,
 }
