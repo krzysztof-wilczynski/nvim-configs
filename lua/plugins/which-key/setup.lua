@@ -21,7 +21,7 @@ wk.setup({
       windows = false,
       nav = false,
       z = false,
-      g = false,
+      g = true,
     },
   },
   preset = "helix",
