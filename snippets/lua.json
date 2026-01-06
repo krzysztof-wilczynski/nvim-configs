@@ -1,0 +1,11 @@
+{
+  "Lua function": {
+    "prefix": "fn",
+    "body": [
+      "function ${1:name}(${2:args})",
+      "  ${0} -- ciało funkcji",
+      "end"
+    ],
+    "description": "Tworzy funkcję Lua"
+  }
+}

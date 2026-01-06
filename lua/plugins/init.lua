@@ -1,4 +1,3 @@
 return {
-	{ import = "plugins.languages" },
-	{ import = "plugins.misc" },
+  { import = "plugins.languages" },
 }

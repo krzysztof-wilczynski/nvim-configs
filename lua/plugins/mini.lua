@@ -1,39 +1,105 @@
 return {
-	{
-		"echasnovski/mini.icons",
-		opts = {
-			file = {
-				[".eslintrc.js"] = { glyph = "󰱺", hl = "MiniIconsYellow" },
-				[".node-version"] = { glyph = "", hl = "MiniIconsGreen" },
-				[".prettierrc"] = { glyph = "", hl = "MiniIconsPurple" },
-				[".yarnrc.yml"] = { glyph = "", hl = "MiniIconsBlue" },
-				["eslint.config.js"] = { glyph = "󰱺", hl = "MiniIconsYellow" },
-				["package.json"] = { glyph = "", hl = "MiniIconsGreen" },
-				["tsconfig.json"] = { glyph = "", hl = "MiniIconsAzure" },
-				["tsconfig.build.json"] = { glyph = "", hl = "MiniIconsAzure" },
-				["yarn.lock"] = { glyph = "", hl = "MiniIconsBlue" },
-			},
-		},
-	},
-	{
-		"echasnovski/mini.pairs",
-		version = "*", -- stable
-		config = function()
-			require("mini.pairs").setup()
-		end,
-	},
-	{
-		"echasnovski/mini.surround",
-		version = "*", -- stable
-		config = function()
-			require("mini.surround").setup()
-		end,
-	},
-	{
-		"echasnovski/mini.ai",
-		version = "*", -- stable
-		config = function()
-			require("mini.ai").setup()
-		end,
-	},
+  {
+    "echasnovski/mini.operators",
+    version = false,
+    config = function()
+      require("mini.operators").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.surround",
+    version = false,
+    config = function()
+      require("mini.surround").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.icons",
+    version = false,
+    config = function()
+      require("mini.icons").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.ai",
+    version = false,
+    config = function()
+      local ai = require("mini.ai")
+      ai.setup({
+        custom_textobjects = {
+          -- Treesitter textobjects
+          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
+          a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
+          o = ai.gen_spec.treesitter({ a = "@loop.outer", i = "@loop.inner" }),
+          i = ai.gen_spec.treesitter({ a = "@conditional.outer", i = "@conditional.inner" }),
+        },
+        n_lines = 500,
+      })
+    end,
+  },
+  {
+    "echasnovski/mini.pairs",
+    version = false,
+    config = function()
+      require("mini.pairs").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.notify",
+    version = false,
+    config = function()
+      -- Ustaw własny format powiadomień: ikona, czas, poziom, wiadomość
+      local icons = {
+        ERROR = "",
+        WARN  = "",
+        INFO  = "",
+        DEBUG = "",
+        TRACE = "󰙎",
+        OFF   = "",
+      }
+
+      require("mini.notify").setup({
+        content = {
+          format = function(notif)
+            local icon = icons[notif.level] or ""
+            local time = os.date("%H:%M:%S", notif.ts_update)
+            local level = notif.level:sub(1, 1):upper() .. notif.level:sub(2):lower()
+            return string.format("%s [%s] %s: %s", icon, time, level, notif.msg)
+          end,
+          -- Najnowsze powiadomienia na górze
+          sort = function(notif_arr)
+            table.sort(notif_arr, function(a, b) return a.ts_update > b.ts_update end)
+            return notif_arr
+          end,
+        },
+        lsp_progress = {
+          enable = false,
+        },
+        window = {
+          config = function()
+            return {
+              anchor = "SE",
+              col = vim.o.columns,
+              row = vim.o.lines, -- górny prawy róg
+              border = "rounded",
+              zindex = 2000,
+            }
+          end,
+          max_width_share = 0.45, -- szersze okno
+          winblend = 15,          -- lekka przezroczystość
+        },
+      })
+
+      -- Ustaw mini.notify jako domyślny handler powiadomień
+      vim.notify = require("mini.notify").make_notify({
+        ERROR = { duration = 8000, hl_group = "DiagnosticError" },
+        WARN  = { duration = 6000, hl_group = "DiagnosticWarn" },
+        INFO  = { duration = 4000, hl_group = "DiagnosticInfo" },
+        DEBUG = { duration = 3000, hl_group = "DiagnosticHint" },
+        TRACE = { duration = 2000, hl_group = "DiagnosticOk" },
+        OFF   = { duration = 1500, hl_group = "MiniNotifyNormal" },
+      })
+    end,
+  }
 }

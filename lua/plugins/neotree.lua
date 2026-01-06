@@ -1,55 +1,66 @@
 -- Drzewo plików
+
 return {
-	-- Współpraca operacji na plikach z LSP (update importów itd.)
-	{
-		"antosha417/nvim-lsp-file-operations",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-neo-tree/neo-tree.nvim",
-		},
-		config = function()
-			require("lsp-file-operations").setup()
-		end,
-	},
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"MunifTanjim/nui.nvim",
-		},
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+      "s1n7ax/nvim-window-picker",
+    },
+    config = function()
+      require("neo-tree").setup({
+        window = {
+          position = "right",
+          width = 40,
+          mapping_options = {
+            noremap = true,
+            nowait = true,
+          },
+          mappings = {
+            ["l"] = "open",
+            ["h"] = "close_node",
+            ["q"] = "close_window",
+            ["s"] = "open_split",
+            ["v"] = "open_vsplit",
+            ["o"] = "system_open",
+            ["w"] = "open_with_window_picker",
+            ["<space>"] = "noop",             -- wyłącz toggle spacją
+          },
+        },
+        filesystem = {
+          filtered_items = {
+            hide_dotfiles = false,
+            hide_gitignored = false,
+            hide_hidden = false,
+            hide_by_name = {
+              "node_modules", ".git"
+            },
+            always_show = {
+              "package.json", "README.md", ".env"
+            },
+          },
+          use_libuv_file_watcher = false,
+          open_file_on_create = true,
+        },
+        commands = {
+          system_open = function(state)
+            local node = state.tree:get_node()
+            local path = node:get_id()
+            local sysname = vim.loop.os_uname().sysname
 
-		config = function()
-			vim.keymap.set("n", "<leader>n", ":Neotree right toggle<CR>", { desc = "Pokaż/ukryj drzewo plików" })
-
-			require("neo-tree").setup({
-				window = {
-					position = "right",
-					width = 40,
-					mapping_options = {
-						noremap = true,
-						nowait = true,
-					},
-					mappings = {
-						["l"] = "open",
-						["h"] = "close_node",
-
-						-- disable toggling with space
-						["<space>"] = "noop",
-					},
-				},
-				filesystem = {
-					filtered_items = {
-						hide_dotfiles = false,
-						hide_gitignored = false,
-						hide_hidden = false,
-						hide_by_name = {
-							"node_modules",
-						},
-					},
-				},
-			})
-		end,
-	},
+            if sysname == "Windows_NT" then
+              -- Otwórz plik lub folder w domyślnej aplikacji Windows
+              vim.fn.jobstart({ "cmd.exe", "/C", "start", "", path }, { detach = true })
+            else
+              -- Zakładamy Linux (xdg-open)
+              vim.fn.jobstart({ "xdg-open", path }, { detach = true })
+            end
+          end,
+        },
+      })
+    end,
+  },
 }

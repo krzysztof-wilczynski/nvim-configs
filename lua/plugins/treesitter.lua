@@ -1,49 +1,24 @@
--- Podświetlanie składni
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = "BufReadPre",
-
-    main = "nvim-treesitter.configs",
-
-opts = {
-      highlight = {enable = true},
-      indent = {enable = true},
-      ensure_installed = {
-        "lua",
-        "vim",
-        "vimdoc",
-        "query",
-        "css",
-        "csv",
-        "dockerfile",
-        "graphql",
-        "html",
-        "http",
-        "javascript",
-        "prisma",
-        "regex",
-        "sql",
-        "typescript",
-        "vue",
-        "yaml",
-        "json",
-        "python",
-        "toml",
-        "markdown",
-        "markdown_inline",
-      },
+  "nvim-treesitter/nvim-treesitter",
+  branch = "master",  -- stabilna wersja (nie main!)
+  dependencies = {
+    "hiphish/rainbow-delimiters.nvim",
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
+  build = ":TSUpdate",
+  lazy = false,
+  config = function()
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = { "lua", "rust", "toml", "markdown", "json", "vim", "vimdoc" },
       auto_install = true,
-    },
-
-    dependencies = {
-      "hiphish/rainbow-delimiters.nvim",
-    },
-  },
-  {
-    -- Use treesitter to autoclose and autorename html tag
-    "windwp/nvim-ts-autotag",
-    event = "BufReadPre",
-  },
+      highlight = { enable = true },
+      indent = { enable = true },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+        },
+      },
+    })
+  end,
 }
