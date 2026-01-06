@@ -10,6 +10,7 @@
 | `<Space>n` | Eksplorator plików |
 | `<Space>fp` | Projekty |
 | `<Space>fb` | Bufory |
+| `<Space>fn` | Powiadomienia |
 
 ## Nawigacja po kodzie (LSP)
 
@@ -23,8 +24,18 @@
 | `K` | Dokumentacja (hover) |
 | `<Space>fs` | Szukaj symbolu |
 | `<Space>fS` | Szukaj symbolu (workspace) |
-| `<Space>ca` | Code Action (quick fix) |
 | `<Space>q` | Lista diagnostyki |
+
+## Akcje kodu i diagnostyka
+
+| Skrót | Akcja |
+|-------|-------|
+| `ga` | Menu akcji kodu (code action) |
+| `gf` | Szybka poprawka (bez menu) |
+| `gF` | Napraw wszystko w pliku |
+| `ge` | Pokaż błąd (float) |
+| `]d` | Następny błąd |
+| `[d` | Poprzedni błąd |
 
 ## Cargo/Rust
 
@@ -47,8 +58,8 @@
 
 | Skrót | Akcja |
 |-------|-------|
-| `<Space>ce` | Wyjaśnij błąd |
-| `<Space>cE` | Pełna diagnostyka |
+| `gE` | Wyjaśnij błąd (szczegółowo) |
+| `gR` | Renderuj diagnostykę |
 | `<Space>cm` | Rozwiń makro |
 | `<Space>ch` | Akcje hover |
 | `<Space>cj` | Złącz linie |
@@ -251,10 +262,11 @@ Na dashboardzie: `s` - przywróć sesję dla bieżącego katalogu.
 1. Otwórz projekt          → <Space>fp
 2. Znajdź plik             → <Space>ff
 3. Pisz kod                → K (hover), gd (definicja)
-4. Sprawdź błędy           → <Space>ck lub <Space>cl
-5. Napraw błąd             → <Space>ca (code action)
-6. Uruchom                 → <Space>cr
-7. Debug                   → <Space>db + <Space>cD
-8. Testy                   → <Space>ct lub <Space>cT
-9. Commit                  → <Space>gg
+4. Pokaż błąd              → ge (float) lub gE (szczegóły Rust)
+5. Napraw błąd             → ga (menu) lub gf (szybka poprawka)
+6. Sprawdź projekt         → <Space>ck lub <Space>cl
+7. Uruchom                 → <Space>cr
+8. Debug                   → <Space>db + <Space>cD
+9. Testy                   → <Space>ct lub <Space>cT
+10. Commit                 → <Space>gg
 ```
