@@ -8,7 +8,7 @@ local lsp_common = require("config.lsp.common")
 local capabilities = lsp_common.get_capabilities()
 
 mason_lsp.setup({
-  ensure_installed = { "lua_ls" },
+  ensure_installed = { "lua_ls", "yamlls", "dockerls" },
   automatic_installation = true,
   handlers = {
     function(server_name)
@@ -26,6 +26,26 @@ mason_lsp.setup({
         handlers = lsp_common.handlers,
 
         settings = require("config.lsp.servers.lua_ls").settings
+      })
+    end,
+
+    ["yamlls"] = function()
+      require("lspconfig").yamlls.setup({
+        on_attach = lsp_common.on_attach,
+        capabilities = capabilities,
+        handlers = lsp_common.handlers,
+
+        settings = require("config.lsp.servers.yamlls").settings
+      })
+    end,
+
+    ["dockerls"] = function()
+      require("lspconfig").dockerls.setup({
+        on_attach = lsp_common.on_attach,
+        capabilities = capabilities,
+        handlers = lsp_common.handlers,
+
+        settings = require("config.lsp.servers.dockerls").settings
       })
     end,
 
