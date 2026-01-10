@@ -191,6 +191,24 @@ local function cargo_new()
   end)
 end
 
+-- Funkcja do uruchamiania z argumentami
+local function cargo_run_with_args()
+  vim.ui.input({ prompt = "🦀 Argumenty dla cargo run: " }, function(args)
+    if args then
+      vim.cmd("CargoRun " .. args)
+    end
+  end)
+end
+
+-- Funkcja do uruchamiania w terminalu z argumentami
+local function cargo_run_term_with_args()
+  vim.ui.input({ prompt = "🦀 Argumenty dla cargo run (terminal): " }, function(args)
+    if args then
+      vim.cmd("CargoRunTerm " .. args)
+    end
+  end)
+end
+
 wk.add({
   { "<leader>c", group = "🦀 Cargo" },
 
@@ -198,6 +216,8 @@ wk.add({
   { "<leader>cb", "<cmd>CargoBuild<CR>", desc = "🔨 Buduj" },
   { "<leader>cr", "<cmd>CargoRun<CR>", desc = "▶️ Uruchom" },
   { "<leader>cR", "<cmd>CargoRunTerm<CR>", desc = "🖥️ Uruchom (terminal)" },
+  { "<leader>cRa", cargo_run_term_with_args, desc = "🖥️ Uruchom (terminal) z argumentami" },
+  { "<leader>ca", cargo_run_with_args, desc = "▶️ Uruchom z argumentami" },
   { "<leader>ct", "<cmd>CargoTest<CR>", desc = "🧪 Testuj" },
   { "<leader>ck", "<cmd>CargoCheck<CR>", desc = "✅ Sprawdź" },
   { "<leader>cl", "<cmd>CargoClippy<CR>", desc = "📎 Clippy" },
