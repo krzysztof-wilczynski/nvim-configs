@@ -350,6 +350,10 @@ wk.add({
 
   -- Sesje (auto-session) - keybindy zdefiniowane w pluginie
   { "<leader>S", group = "💾 Sesje" },
+
+  -- Makra/Rejestry
+  { "<leader>M", group = "🎬 Makra" },
+  { "<leader>Mr", "<cmd>registers<CR>", desc = "📋 Pokaż rejestry" },
 })
 
 -- Markdown keymaps (tylko dla plików .md)

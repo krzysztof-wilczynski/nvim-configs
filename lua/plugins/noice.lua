@@ -22,13 +22,31 @@ return {
         enabled = true,
         view = "cmdline",
       },
+      messages = {
+        enabled = true,
+        view = "mini",
+        view_error = "mini",
+        view_warn = "mini",
+      },
       presets = {
         bottom_search = true,
         long_message_to_split = true,
+        cmdline_output_to_split = false,
       },
       routes = {
-        -- Ukryj powiadomienia treesitter o kompilacji parserów
-        { filter = { find = "nvim%-treesitter" }, opts = { skip = true } },
+        -- Ukryj "recording @x" - mamy wskaźnik w lualine
+        { filter = { event = "msg_showmode" },                              opts = { skip = true } },
+        { filter = { find = "nvim%-treesitter" },                           opts = { skip = true } },
+        { filter = { event = "msg_show", kind = "", find = "written" },     opts = { skip = true } },
+        { filter = { event = "msg_show", kind = "", find = "fewer lines" }, opts = { skip = true } },
+        { filter = { event = "msg_show", kind = "", find = "more lines" },  opts = { skip = true } },
+        { filter = { event = "msg_show", kind = "", find = "yanked" },      opts = { skip = true } },
+        { filter = { event = "msg_show", kind = "search_count" },           opts = { skip = true } },
+        { filter = { event = "msg_show", find = "search hit" },             opts = { skip = true } },
+        { filter = { event = "msg_show", find = "Pattern not found" },      view = "mini" },
+        -- Rejestry wyświetlaj w vsplit (nie jako mini)
+        { filter = { event = "msg_show", find = "Type Name Content" },      view = "vsplit" },
+        { filter = { event = "msg_show" },                                  view = "mini" },
       },
       views = {
         mini = {

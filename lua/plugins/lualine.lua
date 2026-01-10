@@ -2,6 +2,14 @@ local function clock()
   return os.date("%H:%M")
 end
 
+local function macro_recording()
+  local reg = vim.fn.reg_recording()
+  if reg ~= "" then
+    return "󰑋 @" .. reg
+  end
+  return ""
+end
+
 local function lsp_status()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
   if #clients > 0 then
@@ -57,7 +65,8 @@ return {
           { "filename", path = 1 },
         },
         lualine_x = {
-          { lsp_status,  color = { fg = "#a6e3a1" } },
+          { macro_recording, color = { fg = "#f38ba8" } },
+          { lsp_status, color = { fg = "#a6e3a1" } },
           { "fileformat" },
           { "filetype",  icon_only = true },
         },
