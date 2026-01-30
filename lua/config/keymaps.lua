@@ -434,3 +434,60 @@ vim.api.nvim_create_autocmd("FileType", {
     python_keymaps(args.buf)
   end,
 })
+
+-- ┌──────────────────────────────────────────────────────────────────────────┐
+-- │                    WHICH-KEY: VUE/FRONTEND (v)                           │
+-- └──────────────────────────────────────────────────────────────────────────┘
+
+local function vue_keymaps(bufnr)
+  local opts = { buffer = bufnr }
+  wk.add({
+    { "<leader>v", group = "🌿 Vue/Frontend", opts },
+
+    -- Akcje LSP
+    { "<leader>vo", function()
+      vim.lsp.buf.code_action({
+        context = { only = { "source.organizeImports" } },
+        apply = true,
+      })
+    end, desc = "📦 Organize imports", opts },
+
+    { "<leader>vf", function()
+      vim.lsp.buf.code_action({
+        context = { only = { "source.fixAll.eslint" } },
+        apply = true,
+      })
+    end, desc = "🔧 ESLint: Fix all", opts },
+
+    { "<leader>vr", "<cmd>LspRestart<CR>", desc = "🔄 Restart LSP", opts },
+
+    { "<leader>va", function()
+      vim.lsp.buf.code_action({
+        context = { only = { "source.addMissingImports" } },
+        apply = true,
+      })
+    end, desc = "➕ Add missing imports", opts },
+
+    { "<leader>vu", function()
+      vim.lsp.buf.code_action({
+        context = { only = { "source.removeUnused" } },
+        apply = true,
+      })
+    end, desc = "➖ Remove unused imports", opts },
+
+    -- Testy (neotest-vitest)
+    { "<leader>vt", group = "🧪 Testy", opts },
+    { "<leader>vtt", function() require("neotest").run.run() end, desc = "Uruchom najbliższy test", opts },
+    { "<leader>vtf", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Uruchom testy w pliku", opts },
+    { "<leader>vts", function() require("neotest").summary.toggle() end, desc = "Podsumowanie testów", opts },
+    { "<leader>vto", function() require("neotest").output.open({ enter = true }) end, desc = "Wyjście testu", opts },
+    { "<leader>vtS", function() require("neotest").run.stop() end, desc = "Zatrzymaj testy", opts },
+  })
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "vue", "typescript", "javascript", "typescriptreact", "javascriptreact" },
+  callback = function(args)
+    vue_keymaps(args.buf)
+  end,
+})

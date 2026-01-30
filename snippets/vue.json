@@ -1,0 +1,292 @@
+{
+  "Vue 3 Base (Composition API)": {
+    "prefix": "vbase",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "$0",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    ",
+      "  </div>",
+      "</template>",
+      "",
+      "<style scoped lang=\"scss\">",
+      "</style>"
+    ],
+    "description": "Podstawowy komponent Vue 3 z Composition API"
+  },
+  "Vue 3 Base (minimal)": {
+    "prefix": "vbase3",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "$0",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    ",
+      "  </div>",
+      "</template>"
+    ],
+    "description": "Minimalny komponent Vue 3"
+  },
+  "Ref": {
+    "prefix": "vref",
+    "body": "const ${1:name} = ref<${2:type}>(${3:value})",
+    "description": "Reaktywna referencja (ref)"
+  },
+  "Ref object": {
+    "prefix": "vrefobj",
+    "body": [
+      "const ${1:name} = ref<${2:Type}>({",
+      "  ${3:property}: ${4:value},",
+      "})"
+    ],
+    "description": "Reaktywna referencja obiektu"
+  },
+  "Reactive": {
+    "prefix": "vreactive",
+    "body": [
+      "const ${1:state} = reactive<${2:Type}>({",
+      "  ${3:property}: ${4:value},",
+      "})"
+    ],
+    "description": "Reaktywny obiekt (reactive)"
+  },
+  "Computed": {
+    "prefix": "vcomputed",
+    "body": [
+      "const ${1:name} = computed(() => {",
+      "  return ${2:value}",
+      "})"
+    ],
+    "description": "Computed property"
+  },
+  "Computed getter/setter": {
+    "prefix": "vcomputedgs",
+    "body": [
+      "const ${1:name} = computed({",
+      "  get: () => ${2:value},",
+      "  set: (val) => {",
+      "    ${3:// setter logic}",
+      "  },",
+      "})"
+    ],
+    "description": "Computed z getter i setter"
+  },
+  "Watch": {
+    "prefix": "vwatch",
+    "body": [
+      "watch(${1:source}, (${2:newVal}, ${3:oldVal}) => {",
+      "  $0",
+      "})"
+    ],
+    "description": "Watch na źródle"
+  },
+  "Watch immediate": {
+    "prefix": "vwatchi",
+    "body": [
+      "watch(",
+      "  ${1:source},",
+      "  (${2:newVal}, ${3:oldVal}) => {",
+      "    $0",
+      "  },",
+      "  { immediate: true }",
+      ")"
+    ],
+    "description": "Watch z immediate"
+  },
+  "WatchEffect": {
+    "prefix": "vwatcheffect",
+    "body": [
+      "watchEffect(() => {",
+      "  $0",
+      "})"
+    ],
+    "description": "WatchEffect (automatyczne śledzenie zależności)"
+  },
+  "Props": {
+    "prefix": "vprops",
+    "body": [
+      "interface Props {",
+      "  ${1:propName}: ${2:string}",
+      "}",
+      "",
+      "const props = defineProps<Props>()"
+    ],
+    "description": "Definicja props z TypeScript"
+  },
+  "Props with defaults": {
+    "prefix": "vpropsdef",
+    "body": [
+      "interface Props {",
+      "  ${1:propName}?: ${2:string}",
+      "}",
+      "",
+      "const props = withDefaults(defineProps<Props>(), {",
+      "  ${1:propName}: ${3:'default'},",
+      "})"
+    ],
+    "description": "Props z domyślnymi wartościami"
+  },
+  "Emits": {
+    "prefix": "vemits",
+    "body": [
+      "interface Emits {",
+      "  (e: '${1:eventName}', ${2:payload}: ${3:string}): void",
+      "}",
+      "",
+      "const emit = defineEmits<Emits>()"
+    ],
+    "description": "Definicja emits z TypeScript"
+  },
+  "Emit call": {
+    "prefix": "vemit",
+    "body": "emit('${1:eventName}', ${2:payload})",
+    "description": "Wywołanie emit"
+  },
+  "OnMounted": {
+    "prefix": "vonmounted",
+    "body": [
+      "onMounted(() => {",
+      "  $0",
+      "})"
+    ],
+    "description": "Lifecycle hook onMounted"
+  },
+  "OnUnmounted": {
+    "prefix": "vonunmounted",
+    "body": [
+      "onUnmounted(() => {",
+      "  $0",
+      "})"
+    ],
+    "description": "Lifecycle hook onUnmounted"
+  },
+  "OnBeforeMount": {
+    "prefix": "vonbeforemount",
+    "body": [
+      "onBeforeMount(() => {",
+      "  $0",
+      "})"
+    ],
+    "description": "Lifecycle hook onBeforeMount"
+  },
+  "v-for": {
+    "prefix": "vfor",
+    "body": "<${1:div} v-for=\"${2:item} in ${3:items}\" :key=\"${2:item}.${4:id}\">",
+    "description": "Dyrektywa v-for"
+  },
+  "v-if": {
+    "prefix": "vif",
+    "body": "<${1:div} v-if=\"${2:condition}\">",
+    "description": "Dyrektywa v-if"
+  },
+  "v-else-if": {
+    "prefix": "velseif",
+    "body": "<${1:div} v-else-if=\"${2:condition}\">",
+    "description": "Dyrektywa v-else-if"
+  },
+  "v-else": {
+    "prefix": "velse",
+    "body": "<${1:div} v-else>",
+    "description": "Dyrektywa v-else"
+  },
+  "v-show": {
+    "prefix": "vshow",
+    "body": "<${1:div} v-show=\"${2:condition}\">",
+    "description": "Dyrektywa v-show"
+  },
+  "v-model": {
+    "prefix": "vmodel",
+    "body": "v-model=\"${1:value}\"",
+    "description": "Dyrektywa v-model"
+  },
+  "v-bind": {
+    "prefix": "vbind",
+    "body": ":${1:attr}=\"${2:value}\"",
+    "description": "Skrócony v-bind"
+  },
+  "v-on": {
+    "prefix": "von",
+    "body": "@${1:event}=\"${2:handler}\"",
+    "description": "Skrócony v-on"
+  },
+  "Template ref": {
+    "prefix": "vtref",
+    "body": "const ${1:refName} = ref<${2:HTMLDivElement} | null>(null)",
+    "description": "Template ref"
+  },
+  "Composable": {
+    "prefix": "vcomposable",
+    "body": [
+      "export function use${1:Name}() {",
+      "  const ${2:state} = ref(${3:initialValue})",
+      "",
+      "  function ${4:action}() {",
+      "    $0",
+      "  }",
+      "",
+      "  return {",
+      "    ${2:state},",
+      "    ${4:action},",
+      "  }",
+      "}"
+    ],
+    "description": "Composable function"
+  },
+  "Provide": {
+    "prefix": "vprovide",
+    "body": "provide('${1:key}', ${2:value})",
+    "description": "Provide wartości"
+  },
+  "Inject": {
+    "prefix": "vinject",
+    "body": "const ${1:value} = inject<${2:Type}>('${3:key}')",
+    "description": "Inject wartości"
+  },
+  "Async setup": {
+    "prefix": "vasync",
+    "body": [
+      "const ${1:data} = await ${2:fetchData}()"
+    ],
+    "description": "Async operation w script setup"
+  },
+  "Define expose": {
+    "prefix": "vexpose",
+    "body": [
+      "defineExpose({",
+      "  ${1:methodOrValue},",
+      "})"
+    ],
+    "description": "Expose metod/wartości dla parent"
+  },
+  "Slot": {
+    "prefix": "vslot",
+    "body": "<slot name=\"${1:default}\">${2:fallback}</slot>",
+    "description": "Named slot"
+  },
+  "Scoped slot": {
+    "prefix": "vscopedslot",
+    "body": "<slot name=\"${1:default}\" :${2:prop}=\"${3:value}\"></slot>",
+    "description": "Scoped slot"
+  },
+  "Script import": {
+    "prefix": "vimp",
+    "body": "import ${1:Component} from '@/${2:components}/${1:Component}.vue'",
+    "description": "Import komponentu Vue"
+  },
+  "Style scoped": {
+    "prefix": "vstyle",
+    "body": [
+      "<style scoped lang=\"scss\">",
+      ".${1:className} {",
+      "  $0",
+      "}",
+      "</style>"
+    ],
+    "description": "Style scoped z SCSS"
+  }
+}

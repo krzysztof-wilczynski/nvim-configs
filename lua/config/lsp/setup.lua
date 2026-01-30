@@ -8,7 +8,11 @@ local lsp_common = require("config.lsp.common")
 local capabilities = lsp_common.get_capabilities()
 
 mason_lsp.setup({
-  ensure_installed = { "lua_ls", "yamlls", "dockerls", "basedpyright", "ruff", "djlsp" },
+  ensure_installed = {
+    "lua_ls", "yamlls", "dockerls", "basedpyright", "ruff", "djlsp",
+    -- Vue/Frontend
+    "vue_ls", "ts_ls", "cssls", "eslint",
+  },
   automatic_installation = true,
   handlers = {
     function(server_name)
@@ -83,5 +87,51 @@ mason_lsp.setup({
     end,
 
     ["rust_analyzer"] = function() end,
+
+    -- Vue/Frontend
+    ["vue_ls"] = function()
+      local vue_config = require("config.lsp.servers.vue_ls")
+      require("lspconfig").vue_ls.setup({
+        on_attach = lsp_common.on_attach,
+        capabilities = capabilities,
+        handlers = lsp_common.handlers,
+        settings = vue_config.settings,
+        filetypes = vue_config.filetypes,
+      })
+    end,
+
+    ["ts_ls"] = function()
+      local ts_config = require("config.lsp.servers.ts_ls")
+      require("lspconfig").ts_ls.setup({
+        on_attach = lsp_common.on_attach,
+        capabilities = capabilities,
+        handlers = lsp_common.handlers,
+        init_options = ts_config.init_options,
+        filetypes = ts_config.filetypes,
+        settings = ts_config.settings,
+      })
+    end,
+
+    ["cssls"] = function()
+      local css_config = require("config.lsp.servers.cssls")
+      require("lspconfig").cssls.setup({
+        on_attach = lsp_common.on_attach,
+        capabilities = capabilities,
+        handlers = lsp_common.handlers,
+        settings = css_config.settings,
+        filetypes = css_config.filetypes,
+      })
+    end,
+
+    ["eslint"] = function()
+      local eslint_config = require("config.lsp.servers.eslint")
+      require("lspconfig").eslint.setup({
+        on_attach = lsp_common.on_attach,
+        capabilities = capabilities,
+        handlers = lsp_common.handlers,
+        settings = eslint_config.settings,
+        filetypes = eslint_config.filetypes,
+      })
+    end,
   }
 })

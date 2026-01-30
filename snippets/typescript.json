@@ -1,0 +1,271 @@
+{
+  "Interface": {
+    "prefix": "int",
+    "body": [
+      "interface ${1:Name} {",
+      "  ${2:property}: ${3:type}",
+      "}"
+    ],
+    "description": "Interfejs TypeScript"
+  },
+  "Interface extends": {
+    "prefix": "intx",
+    "body": [
+      "interface ${1:Name} extends ${2:Base} {",
+      "  ${3:property}: ${4:type}",
+      "}"
+    ],
+    "description": "Interfejs rozszerzający"
+  },
+  "Type alias": {
+    "prefix": "type",
+    "body": "type ${1:Name} = ${2:type}",
+    "description": "Type alias"
+  },
+  "Type union": {
+    "prefix": "typeu",
+    "body": "type ${1:Name} = ${2:Type1} | ${3:Type2}",
+    "description": "Union type"
+  },
+  "Type intersection": {
+    "prefix": "typei",
+    "body": "type ${1:Name} = ${2:Type1} & ${3:Type2}",
+    "description": "Intersection type"
+  },
+  "Enum": {
+    "prefix": "enum",
+    "body": [
+      "enum ${1:Name} {",
+      "  ${2:Value} = '${3:value}',",
+      "}"
+    ],
+    "description": "Enum TypeScript"
+  },
+  "Async function": {
+    "prefix": "afn",
+    "body": [
+      "async function ${1:name}(${2:args}): Promise<${3:void}> {",
+      "  $0",
+      "}"
+    ],
+    "description": "Funkcja asynchroniczna"
+  },
+  "Arrow function": {
+    "prefix": "arfn",
+    "body": "const ${1:name} = (${2:args}): ${3:void} => {",
+    "description": "Arrow function z typami"
+  },
+  "Arrow async": {
+    "prefix": "arafn",
+    "body": "const ${1:name} = async (${2:args}): Promise<${3:void}> => {",
+    "description": "Async arrow function"
+  },
+  "Try-catch": {
+    "prefix": "tryc",
+    "body": [
+      "try {",
+      "  $0",
+      "} catch (error) {",
+      "  if (error instanceof Error) {",
+      "    console.error(error.message)",
+      "  }",
+      "}"
+    ],
+    "description": "Try-catch z typowanym error"
+  },
+  "Try-catch-finally": {
+    "prefix": "trycf",
+    "body": [
+      "try {",
+      "  $0",
+      "} catch (error) {",
+      "  if (error instanceof Error) {",
+      "    console.error(error.message)",
+      "  }",
+      "} finally {",
+      "  ",
+      "}"
+    ],
+    "description": "Try-catch-finally"
+  },
+  "Export default": {
+    "prefix": "expd",
+    "body": "export default ${1:value}",
+    "description": "Export default"
+  },
+  "Export named": {
+    "prefix": "expn",
+    "body": "export { ${1:name} }",
+    "description": "Named export"
+  },
+  "Export const": {
+    "prefix": "expc",
+    "body": "export const ${1:name} = ${2:value}",
+    "description": "Export const"
+  },
+  "Export function": {
+    "prefix": "expfn",
+    "body": [
+      "export function ${1:name}(${2:args}): ${3:void} {",
+      "  $0",
+      "}"
+    ],
+    "description": "Export function"
+  },
+  "Export interface": {
+    "prefix": "expint",
+    "body": [
+      "export interface ${1:Name} {",
+      "  ${2:property}: ${3:type}",
+      "}"
+    ],
+    "description": "Export interface"
+  },
+  "Export type": {
+    "prefix": "expt",
+    "body": "export type ${1:Name} = ${2:type}",
+    "description": "Export type"
+  },
+  "Import": {
+    "prefix": "imp",
+    "body": "import { ${2:name} } from '${1:module}'",
+    "description": "Named import"
+  },
+  "Import default": {
+    "prefix": "impd",
+    "body": "import ${2:name} from '${1:module}'",
+    "description": "Default import"
+  },
+  "Import all": {
+    "prefix": "impa",
+    "body": "import * as ${2:name} from '${1:module}'",
+    "description": "Import all as namespace"
+  },
+  "Import type": {
+    "prefix": "impt",
+    "body": "import type { ${2:Type} } from '${1:module}'",
+    "description": "Import type"
+  },
+  "Console log": {
+    "prefix": "cl",
+    "body": "console.log(${1:value})",
+    "description": "console.log"
+  },
+  "Console log object": {
+    "prefix": "clo",
+    "body": "console.log('${1:label}:', ${2:value})",
+    "description": "console.log z etykietą"
+  },
+  "Console error": {
+    "prefix": "ce",
+    "body": "console.error(${1:error})",
+    "description": "console.error"
+  },
+  "Console warn": {
+    "prefix": "cw",
+    "body": "console.warn(${1:warning})",
+    "description": "console.warn"
+  },
+  "Generic function": {
+    "prefix": "gfn",
+    "body": [
+      "function ${1:name}<${2:T}>(${3:arg}: ${2:T}): ${4:T} {",
+      "  $0",
+      "}"
+    ],
+    "description": "Funkcja generyczna"
+  },
+  "Generic interface": {
+    "prefix": "gint",
+    "body": [
+      "interface ${1:Name}<${2:T}> {",
+      "  ${3:property}: ${2:T}",
+      "}"
+    ],
+    "description": "Interfejs generyczny"
+  },
+  "Promise": {
+    "prefix": "prom",
+    "body": [
+      "new Promise<${1:void}>((resolve, reject) => {",
+      "  $0",
+      "})"
+    ],
+    "description": "Promise z typem"
+  },
+  "Readonly": {
+    "prefix": "ro",
+    "body": "readonly ${1:property}: ${2:type}",
+    "description": "Readonly property"
+  },
+  "Optional": {
+    "prefix": "opt",
+    "body": "${1:property}?: ${2:type}",
+    "description": "Optional property"
+  },
+  "Pick": {
+    "prefix": "pick",
+    "body": "Pick<${1:Type}, '${2:key}'>",
+    "description": "Pick utility type"
+  },
+  "Omit": {
+    "prefix": "omit",
+    "body": "Omit<${1:Type}, '${2:key}'>",
+    "description": "Omit utility type"
+  },
+  "Partial": {
+    "prefix": "partial",
+    "body": "Partial<${1:Type}>",
+    "description": "Partial utility type"
+  },
+  "Required": {
+    "prefix": "required",
+    "body": "Required<${1:Type}>",
+    "description": "Required utility type"
+  },
+  "Record": {
+    "prefix": "record",
+    "body": "Record<${1:Keys}, ${2:Type}>",
+    "description": "Record utility type"
+  },
+  "Fetch async": {
+    "prefix": "fetch",
+    "body": [
+      "const response = await fetch('${1:url}')",
+      "const data = await response.json() as ${2:Type}"
+    ],
+    "description": "Fetch z typowaniem"
+  },
+  "Describe test": {
+    "prefix": "desc",
+    "body": [
+      "describe('${1:description}', () => {",
+      "  $0",
+      "})"
+    ],
+    "description": "Describe block (Vitest/Jest)"
+  },
+  "It test": {
+    "prefix": "it",
+    "body": [
+      "it('${1:should}', () => {",
+      "  $0",
+      "})"
+    ],
+    "description": "It block (Vitest/Jest)"
+  },
+  "Test async": {
+    "prefix": "ita",
+    "body": [
+      "it('${1:should}', async () => {",
+      "  $0",
+      "})"
+    ],
+    "description": "Async test"
+  },
+  "Expect": {
+    "prefix": "exp",
+    "body": "expect(${1:value}).${2:toBe}(${3:expected})",
+    "description": "Expect assertion"
+  }
+}

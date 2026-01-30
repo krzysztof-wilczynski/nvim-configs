@@ -8,6 +8,16 @@ return {
       yaml = { "prettier" },
       python = { "ruff_format" },
       htmldjango = { "djlint" },
+      -- Vue/Frontend
+      vue = { "prettier" },
+      javascript = { "prettier" },
+      typescript = { "prettier" },
+      javascriptreact = { "prettier" },
+      typescriptreact = { "prettier" },
+      css = { "prettier" },
+      scss = { "prettier" },
+      json = { "prettier" },
+      html = { "prettier" },
     },
     -- Automatyczne formatowanie na zapis (z wykluczeniem niektórych filetype)
     format_on_save = function(bufnr)
