@@ -106,7 +106,7 @@ return {
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
     cmd = { "DapInstall", "DapUninstall" },
     opts = {
-      ensure_installed = { "codelldb" },
+      ensure_installed = { "codelldb", "debugpy" },
       automatic_installation = true,
       handlers = {},
     },

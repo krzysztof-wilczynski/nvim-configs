@@ -6,6 +6,8 @@ return {
       lua = { "stylua" },
       rust = { "rustfmt" },
       yaml = { "prettier" },
+      python = { "ruff_format" },
+      htmldjango = { "djlint" },
     },
     -- Automatyczne formatowanie na zapis (z wykluczeniem niektórych filetype)
     format_on_save = function(bufnr)

@@ -1,0 +1,283 @@
+{
+  "Funkcja": {
+    "prefix": "def",
+    "body": [
+      "def ${1:nazwa}(${2:args})${3: -> ${4:typ}}:",
+      "\t${5:pass}$0"
+    ],
+    "description": "Definicja funkcji"
+  },
+  "Funkcja async": {
+    "prefix": "adef",
+    "body": [
+      "async def ${1:nazwa}(${2:args})${3: -> ${4:typ}}:",
+      "\t${5:pass}$0"
+    ],
+    "description": "Funkcja asynchroniczna"
+  },
+  "Klasa": {
+    "prefix": "class",
+    "body": [
+      "class ${1:Nazwa}${2:(${3:Base})}:",
+      "\t\"\"\"${4:Opis klasy.}\"\"\"",
+      "",
+      "\tdef __init__(self${5:, ${6:args}}):",
+      "\t\t${7:pass}$0"
+    ],
+    "description": "Definicja klasy"
+  },
+  "Dataclass": {
+    "prefix": "dataclass",
+    "body": [
+      "from dataclasses import dataclass",
+      "",
+      "@dataclass",
+      "class ${1:Nazwa}:",
+      "\t${2:pole}: ${3:typ}$0"
+    ],
+    "description": "Dataclass"
+  },
+  "Django Model": {
+    "prefix": "djmodel",
+    "body": [
+      "class ${1:Nazwa}(models.Model):",
+      "\t\"\"\"${2:Opis modelu.}\"\"\"",
+      "",
+      "\t${3:pole} = models.${4:CharField}(${5:max_length=255})",
+      "",
+      "\tclass Meta:",
+      "\t\tverbose_name = \"${6:$1}\"",
+      "\t\tverbose_name_plural = \"${7:$1s}\"",
+      "",
+      "\tdef __str__(self):",
+      "\t\treturn ${8:self.$3}$0"
+    ],
+    "description": "Django Model"
+  },
+  "Django View": {
+    "prefix": "djview",
+    "body": [
+      "class ${1:Nazwa}View(${2:View}):",
+      "\t\"\"\"${3:Opis widoku.}\"\"\"",
+      "",
+      "\tdef get(self, request, *args, **kwargs):",
+      "\t\t${4:pass}$0"
+    ],
+    "description": "Django class-based view"
+  },
+  "Django Function View": {
+    "prefix": "djfview",
+    "body": [
+      "def ${1:nazwa}_view(request):",
+      "\t\"\"\"${2:Opis widoku.}\"\"\"",
+      "\t${3:pass}$0"
+    ],
+    "description": "Django function view"
+  },
+  "Django Form": {
+    "prefix": "djform",
+    "body": [
+      "class ${1:Nazwa}Form(forms.${2:ModelForm}):",
+      "\t\"\"\"${3:Opis formularza.}\"\"\"",
+      "",
+      "\tclass Meta:",
+      "\t\tmodel = ${4:Model}",
+      "\t\tfields = [${5:\"__all__\"}]$0"
+    ],
+    "description": "Django Form"
+  },
+  "Django Serializer": {
+    "prefix": "djserializer",
+    "body": [
+      "class ${1:Nazwa}Serializer(serializers.${2:ModelSerializer}):",
+      "\t\"\"\"${3:Opis serializera.}\"\"\"",
+      "",
+      "\tclass Meta:",
+      "\t\tmodel = ${4:Model}",
+      "\t\tfields = [${5:\"__all__\"}]$0"
+    ],
+    "description": "Django REST Framework Serializer"
+  },
+  "Django URL": {
+    "prefix": "djurl",
+    "body": [
+      "path(\"${1:route}/\", ${2:views}.${3:NazwaView}.as_view(), name=\"${4:nazwa}\"),$0"
+    ],
+    "description": "Django URL pattern"
+  },
+  "Django Admin": {
+    "prefix": "djadmin",
+    "body": [
+      "@admin.register(${1:Model})",
+      "class ${1}Admin(admin.ModelAdmin):",
+      "\tlist_display = [${2:\"__str__\"}]",
+      "\tsearch_fields = [${3:}]",
+      "\tlist_filter = [${4:}]$0"
+    ],
+    "description": "Django Admin"
+  },
+  "Test": {
+    "prefix": "test",
+    "body": [
+      "def test_${1:nazwa}():",
+      "\t\"\"\"${2:Opis testu.}\"\"\"",
+      "\t${3:assert True}$0"
+    ],
+    "description": "Funkcja testowa pytest"
+  },
+  "Test async": {
+    "prefix": "atest",
+    "body": [
+      "@pytest.mark.asyncio",
+      "async def test_${1:nazwa}():",
+      "\t\"\"\"${2:Opis testu.}\"\"\"",
+      "\t${3:assert True}$0"
+    ],
+    "description": "Asynchroniczny test pytest"
+  },
+  "Fixture": {
+    "prefix": "fixture",
+    "body": [
+      "@pytest.fixture",
+      "def ${1:nazwa}():",
+      "\t\"\"\"${2:Opis fixture.}\"\"\"",
+      "\t${3:return None}$0"
+    ],
+    "description": "Pytest fixture"
+  },
+  "Parametrize": {
+    "prefix": "parametrize",
+    "body": [
+      "@pytest.mark.parametrize(",
+      "\t\"${1:args}\",",
+      "\t[",
+      "\t\t(${2:value1},),",
+      "\t\t(${3:value2},),",
+      "\t],",
+      ")",
+      "def test_${4:nazwa}(${1}):",
+      "\t${5:pass}$0"
+    ],
+    "description": "Pytest parametrize"
+  },
+  "Pydantic Model": {
+    "prefix": "pydantic",
+    "body": [
+      "from pydantic import BaseModel",
+      "",
+      "class ${1:Nazwa}(BaseModel):",
+      "\t\"\"\"${2:Opis modelu.}\"\"\"",
+      "",
+      "\t${3:pole}: ${4:str}$0"
+    ],
+    "description": "Pydantic BaseModel"
+  },
+  "If name main": {
+    "prefix": "ifmain",
+    "body": [
+      "if __name__ == \"__main__\":",
+      "\t${1:main()}$0"
+    ],
+    "description": "If name == main"
+  },
+  "Try except": {
+    "prefix": "try",
+    "body": [
+      "try:",
+      "\t${1:pass}",
+      "except ${2:Exception} as e:",
+      "\t${3:raise}$0"
+    ],
+    "description": "Try/except block"
+  },
+  "Context manager": {
+    "prefix": "with",
+    "body": [
+      "with ${1:open(\"${2:file}\")} as ${3:f}:",
+      "\t${4:pass}$0"
+    ],
+    "description": "With statement"
+  },
+  "List comprehension": {
+    "prefix": "lc",
+    "body": "[${1:x} for ${2:x} in ${3:iterable}${4: if ${5:condition}}]$0",
+    "description": "List comprehension"
+  },
+  "Dict comprehension": {
+    "prefix": "dc",
+    "body": "{${1:k}: ${2:v} for ${3:k}, ${4:v} in ${5:iterable}.items()}$0",
+    "description": "Dict comprehension"
+  },
+  "Lambda": {
+    "prefix": "lam",
+    "body": "lambda ${1:x}: ${2:x}$0",
+    "description": "Lambda function"
+  },
+  "Print": {
+    "prefix": "pr",
+    "body": "print(${1:})$0",
+    "description": "Print statement"
+  },
+  "Print f-string": {
+    "prefix": "prf",
+    "body": "print(f\"${1:}\")$0",
+    "description": "Print f-string"
+  },
+  "Logger": {
+    "prefix": "logger",
+    "body": [
+      "import logging",
+      "",
+      "logger = logging.getLogger(__name__)$0"
+    ],
+    "description": "Logger setup"
+  },
+  "Log debug": {
+    "prefix": "logd",
+    "body": "logger.debug(f\"${1:}\")$0",
+    "description": "Logger debug"
+  },
+  "Log info": {
+    "prefix": "logi",
+    "body": "logger.info(f\"${1:}\")$0",
+    "description": "Logger info"
+  },
+  "Log error": {
+    "prefix": "loge",
+    "body": "logger.error(f\"${1:}\", exc_info=True)$0",
+    "description": "Logger error"
+  },
+  "Property": {
+    "prefix": "prop",
+    "body": [
+      "@property",
+      "def ${1:nazwa}(self)${2: -> ${3:typ}}:",
+      "\t\"\"\"${4:Getter dla $1.}\"\"\"",
+      "\treturn self._${1}$0"
+    ],
+    "description": "Property decorator"
+  },
+  "Classmethod": {
+    "prefix": "clsm",
+    "body": [
+      "@classmethod",
+      "def ${1:nazwa}(cls${2:, ${3:args}})${4: -> ${5:typ}}:",
+      "\t${6:pass}$0"
+    ],
+    "description": "Classmethod"
+  },
+  "Staticmethod": {
+    "prefix": "statm",
+    "body": [
+      "@staticmethod",
+      "def ${1:nazwa}(${2:args})${3: -> ${4:typ}}:",
+      "\t${5:pass}$0"
+    ],
+    "description": "Staticmethod"
+  },
+  "Type hint import": {
+    "prefix": "typing",
+    "body": "from typing import ${1:Optional, List, Dict, Any}$0",
+    "description": "Import typing"
+  }
+}

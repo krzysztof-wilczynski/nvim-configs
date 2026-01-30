@@ -9,7 +9,11 @@ return {
   lazy = false,
   config = function()
     require("nvim-treesitter.configs").setup({
-      ensure_installed = { "lua", "rust", "toml", "markdown", "json", "vim", "vimdoc", "yaml", "dockerfile" },
+      ensure_installed = {
+        "lua", "rust", "toml", "markdown", "json", "vim", "vimdoc", "yaml", "dockerfile",
+        -- Python/Django
+        "python", "htmldjango", "html", "css", "javascript", "ninja", "rst",
+      },
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },

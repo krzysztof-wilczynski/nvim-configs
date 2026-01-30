@@ -384,3 +384,53 @@ vim.api.nvim_create_autocmd("FileType", {
       { buffer = args.buf, desc = "📝 Toggle Markdown preview" })
   end,
 })
+
+-- ┌──────────────────────────────────────────────────────────────────────────┐
+-- │                      WHICH-KEY: PYTHON (p)                               │
+-- └──────────────────────────────────────────────────────────────────────────┘
+
+local function python_keymaps(bufnr)
+  local opts = { buffer = bufnr }
+  wk.add({
+    { "<leader>p", group = "🐍 Python", opts },
+
+    -- Venv (klucz zdefiniowany w pluginie venv-selector)
+    { "<leader>pv", "<cmd>VenvSelect<CR>", desc = "🌐 Wybierz venv", opts },
+
+    -- Testy (neotest)
+    { "<leader>pt", group = "🧪 Testy", opts },
+    { "<leader>ptt", function() require("neotest").run.run() end, desc = "Uruchom najbliższy test", opts },
+    { "<leader>ptf", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Uruchom testy w pliku", opts },
+    { "<leader>pts", function() require("neotest").summary.toggle() end, desc = "Podsumowanie testów", opts },
+    { "<leader>pto", function() require("neotest").output.open({ enter = true }) end, desc = "Wyjście testu", opts },
+    { "<leader>ptS", function() require("neotest").run.stop() end, desc = "Zatrzymaj testy", opts },
+
+    -- Debug (nvim-dap-python)
+    { "<leader>pd", group = "🐛 Debug", opts },
+    { "<leader>pdm", function() require("dap-python").test_method() end, desc = "Debug: metoda", opts },
+    { "<leader>pdc", function() require("dap-python").test_class() end, desc = "Debug: klasa", opts },
+    { "<leader>pds", function() require("dap-python").debug_selection() end, desc = "Debug: zaznaczenie", mode = "v", opts },
+
+    -- Akcje kodu (LSP)
+    { "<leader>po", function()
+      vim.lsp.buf.code_action({
+        context = { only = { "source.organizeImports" } },
+        apply = true,
+      })
+    end, desc = "📦 Organize imports", opts },
+
+    { "<leader>pf", function()
+      vim.lsp.buf.code_action({
+        context = { only = { "source.fixAll" } },
+        apply = true,
+      })
+    end, desc = "🔧 Fix all (Ruff)", opts },
+  })
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function(args)
+    python_keymaps(args.buf)
+  end,
+})

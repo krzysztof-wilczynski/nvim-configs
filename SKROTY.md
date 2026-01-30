@@ -98,6 +98,32 @@
 | `<Space>cpu` | Odinstaluj |
 | `<Space>cps` | Szukaj crate |
 
+## Python
+
+| Skrót | Akcja |
+|-------|-------|
+| `<Space>pv` | Wybierz venv |
+| `<Space>po` | Organize imports |
+| `<Space>pf` | Fix all (Ruff) |
+
+### Testy (neotest + pytest)
+
+| Skrót | Akcja |
+|-------|-------|
+| `<Space>ptt` | Uruchom najbliższy test |
+| `<Space>ptf` | Uruchom testy w pliku |
+| `<Space>pts` | Podsumowanie testów |
+| `<Space>pto` | Wyjście testu |
+| `<Space>ptS` | Zatrzymaj testy |
+
+### Debug (debugpy)
+
+| Skrót | Akcja |
+|-------|-------|
+| `<Space>pdm` | Debug: metoda |
+| `<Space>pdc` | Debug: klasa |
+| `<Space>pds` | Debug: zaznaczenie (visual) |
+
 ## Debugowanie
 
 | Skrót | Akcja |
